@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ValiderController!{% endblock %}
+
+{% block content %}
+
+        </form> 
+
+                                    <div class="bloc_2_cont bloc_liste_moyen">
+                                                <div class="bloc_2_inter_contenant">
+                                                <h1>Liste des moyens à valider</h1>
+                                                </div>
+                                    </div>
+                                                    <div class="new_bloc">
+                                
+                                                        <div class="bloc_2_inter_contenanto">
+
+                                                       
+                                                                        
+                                                            <table class="table">
+                                                                <thead class="head_color">
+                                                                  <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Numero de serie</th>
+                                                                    <th scope="col">Description</th>
+                                                                    <th scope="col">Status du moyen</th>
+                                                                    <th scope="col">Status Bureau Veritas</th>
+                                                                    <th scope="col"></th>
+                                                                    <th scope="col"></th>
+                                                                  </tr>
+                                                                </thead>
+
+                                                                <tbody>
+                                                                 
+                                                                   {% if app.user.fonction == 'QUALITE' %}  
+                                                                            {% for liste_recherche_qualite in liste_recherche_qualites  %}
+                                                                                      <tr>
+                                                                                                    
+
+                                                                                                              <th scope="row">1</th>
+                                                                                                              <td>{{ liste_recherche_qualite.numero }}</td>
+                                                                                                              <td>{{ liste_recherche_qualite.description }}</td>
+                                                                                                              <td>{{ liste_recherche_qualite.statusmoyen }}</td>
+                                                                                                              <td>{{ liste_recherche_qualite.statut_bv }}</td>
+                                                                                                              <td><a href="{{path('fiche_de_vie_modification',{'numero':liste_recherche_qualite.numero})}}"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                                                              <td><a href="{{path('app_supp',{'numero':liste_recherche_qualite.numero})}}"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                                              
+                                                                                        </tr>
+                                                                            {% endfor  %} 
+                                                                   {% endif %}
+
+
+                                                                      {% if app.user.fonction == 'MAINTENANCE' %}  
+                                                                            {% for liste_recherche_maintenance in liste_recherche_maintenances  %}
+                                                                                      <tr>
+                                                                                                    
+
+                                                                                                              <th scope="row">1</th>
+                                                                                                              <td>{{ liste_recherche_maintenance.numero }}</td>
+                                                                                                              <td>{{ liste_recherche_maintenance.description }}</td>
+                                                                                                              <td>{{ liste_recherche_maintenance.statusmoyen }}</td>
+                                                                                                              <td>{{ liste_recherche_maintenance.statut_bv }}</td>
+                                                                                                              <td><a href="{{path('fiche_de_vie_modification',{'numero':liste_recherche_maintenance.numero})}}"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                                                              <td><a href="{{path('app_supp',{'numero':liste_recherche_maintenance.numero})}}"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                                              
+                                                                                        </tr>
+                                                                            {% endfor  %} 
+                                                                   {% endif %}
+
+
+                                                                </tbody>
+                                                              </table>
+                                                                                                          
+                                                    </div>
+                                              
+                                                </div>
+
+{% endblock %}

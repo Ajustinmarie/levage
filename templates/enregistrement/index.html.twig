@@ -1,0 +1,490 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EnregistrementController!{% endblock %}
+
+{% block content %}
+
+
+                                 <div class="bloc_2_contenu contenu_center">
+                                           
+                                           {% if notification1 is not null %}
+                                           <div class="bloc_2_detail alert alert-danger" role="alert">
+                                           <p>{{notification1}}
+                                           </p>
+                                           </div>
+                                           {% endif %}
+
+                                              {% if notification2 is not null %}
+                                            <div class="bloc_2_detail alert-secondary" role="alert">
+                                            <p> {{notification2}}
+                                            </p>
+                                            </div>
+                                             {% endif %}
+                                            
+
+                                            {% if notification3 is not null %}
+                                            <div class="bloc_2_detail alert alert-danger" role="alert">
+                                            <p> {{notification3}}
+                                            </p>
+                                            </div>
+                                            {% endif %}
+                                            
+
+                                            {% if notification4 is not null %}
+                                            <div class="bloc_2_detail alert alert-secondary" role="alert">
+                                            <p>{{notification4}}
+                                            </p>
+                                            </div>
+                                            {% endif %}
+                                             
+                                            {% if notification5 is not null %}
+                                            <div class="bloc_2_detail alert alert-secondary" role="alert">
+                                            <p>{{notification5}}
+                                            </p>
+                                            </div>
+                                             {% endif %}
+
+                                          
+                                            {% if notification6 is not null %}
+                                               <div class="bloc_2_detail alert alert-success" role="alert">
+                                            <p> {{notification6}}
+                                            </p>
+                                            </div>
+                                            {% endif %}
+
+
+                                            {% if notification7 is not null %}
+                                            <div class="bloc_2_detail alert alert-danger" role="alert">
+                                            <p> {{notification7}}
+                                            </p>
+                                            </div>
+                                             {% endif %}
+
+                                              {% if notification8 is not null %}
+                                                 <div class="bloc_2_detail alert alert-danger" role="alert">
+                                            <p> {{notification8}}
+                                            </p>
+                                            </div>
+                                             {% endif %}
+
+                                                 
+
+                                </div>
+
+
+
+                                
+                                <div class="bloc_2_contenu">
+                                    <form action="#" method="POST" enctype="multipart/form-data">
+                                         <!-- NUMERO DE MOYEN DE LEVAGE -->
+                                        <div class="mb-3">
+                                       
+                                          <input type="hidden"  name="user_name" value="{{app.user.name}}"/>
+                                        <label for="exampleInputEmail1" class="form-label">{% if notification3 is not null %}{% endif %}Numero du moyen de levage* <span class="numero_cmu"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> </iconify-icon> </label>
+                                        <input id="numero" class="form-control" {% if numero is defined %} value="{{numero}}" {% endif %}  name="numero" type="text" placeholder="Veuillez saisir le numéro de serie du moyen"> 
+                                        
+                                        </div>
+                                         
+                                         <!-- DESCRIPTION DU MOYEN -->
+                                        <div class="mb-3">
+
+                                            <label for="exampleFormControlSelect1">Description du moyen</label>
+                                                 <select name="description" class="form-control" id="exampleFormControlSelect1">
+                                                    {% for DescriptionMoyen in DescriptionMoyens  %}
+                                                    <option  {% if DescriptionMoyen.name is defined and DescriptionMoyen.name == description_form %} selected {% endif %}   value="{{DescriptionMoyen.name}}">{{DescriptionMoyen.name}}</option>
+                                                    {% endfor  %} 
+                                                  </select>
+
+                                        </div>
+
+                                      
+
+                                      
+                                        
+                                       <!-- CMU -->
+                                        <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">{% if notification3 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon> {% endif %}CMU (kg)* <span class="numero_cmu"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> </label>
+                                        <input {% if cmu is defined %}  value="{{cmu}}" {% endif %}  class="form-control" name="cmu" id="cmu" type="number" placeholder="Veuillez saisir la CMU">
+                                        </div>
+                                        
+                                         <!-- ZONE / SERVICE -->
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Zone / Service</label>
+                                            <select class="form-control" name="zone_service" id="exampleFormControlSelect1">
+                                              {% for zone_service in zone_services  %}
+                                                    <option {% if zone_service.name is defined and zone_service.name == zone_service_form %} selected {% endif %}  value="{{zone_service.name}}">{{zone_service.name}}</option>
+                                              {% endfor  %} 
+                                            </select>
+                                        </div>
+                                       
+                                       <!-- FOURNISSEURS -->
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Fournisseurs</label>
+                                            <select class="form-control" id="fournisseurs" name="fournisseurs" id="exampleFormControlSelect1">
+                                                {% for fournisseur in fournisseurs %}
+                                                      <option {% if fournisseur.name is defined and fournisseur.name == fournisseurs_form %} selected {% endif %} value="{{fournisseur.name}}">{{fournisseur.name}}</option>
+                                                {% endfor  %} 
+                                            </select>
+                                        </div>
+
+                                          <!-- EMPLACEMENT -->
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Emplacement exact</label>
+                                            <select name="emplacement" class="form-control" id="exampleFormControlSelect1"> 
+
+                                               {% for emplacement in emplacements %}                                                                           
+                                               <option {% if emplacement.name is defined and emplacement.name == emplacement_form %} selected {% endif %} value="{{emplacement.name}}">{{emplacement.name}}</option>
+                                               {% endfor  %} 
+
+                                            </select>
+
+
+                                
+                                        </div>
+
+                                       
+                                        <!-- STATUS DU MOYEN -->
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Status du moyen</label>
+                                            <select name="statusmoyen" class="form-control" id="exampleFormControlSelect1" id="status_du_moyen">
+                                               
+                                              
+                                               {% if app.user.fonction == 'MAINTENANCE' %}
+
+                                               {% for statusDuMoyen in statusDuMoyens %}                                                                           
+                                               <option {% if statusDuMoyen.name is defined and statusDuMoyen.name == statusmoyen_form %} selected {% endif %} value="{{statusDuMoyen.name}}">{{statusDuMoyen.name}}</option>
+                                               {% endfor  %}
+                                               
+                                               {% elseif app.user.fonction == 'QUALITE' %}                                               
+
+                                                {% for statusDuMoyen in statusDuMoyens %}                                                                           
+                                               <option {% if statusDuMoyen.name is defined and statusDuMoyen.name == statusmoyen_form %} selected {% endif %} value="{{statusDuMoyen.name}}">{{statusDuMoyen.name}}</option>
+                                               {% endfor  %}
+
+                                               {% else %}
+
+                                               {% for statusDuMoyen2 in statusDuMoyen2s %}                                                                           
+                                               <option {% if statusDuMoyen2.name is defined and statusDuMoyen2.name == statusmoyen_form %} selected {% endif %} value="{{statusDuMoyen2.name}}">{{statusDuMoyen2.name}}</option>
+                                               {% endfor  %} 
+
+
+
+                                               {% endif %}
+
+                                            </select>
+                                        </div>
+
+                                     
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Date de vérification Bureau Véritas*</label>
+                                            <input {% if dateverifbv is defined %} value="{{dateverifbv}}" {% endif %} name="dateverifbv"  class="form-control" type="date" placeholder="Default input">
+                                        </div>
+                                       
+                                        <!-- STATUS DU BV -->
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Status Bureau Veritas</label>
+                                            <select  name="statusbv" class="form-control" id="exampleFormControlSelect1" id="statusbv"  onchange="handleStatusBVChange(this)"> 
+
+                                               {% for statusBV in statusBVs %}                                                                           
+                                               <option {% if statusBV.name is defined and statusBV.name == statusbv_form %} selected {% endif %}  value="{{statusBV.name}}">{{statusBV.name}}</option>
+                                               {% endfor  %}  
+
+                                            </select>
+                                        </div>
+
+                        <div class="block_action" >                    
+                                         <!-- MOTIF BV -->
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Motif Bureau Veritas  {% if notification1 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon> {% endif %} </label>
+                                            <select  name="motifBV" class="form-control" id="exampleFormControlSelect1">
+                                             
+                                                <option value="Neant">Neant</option>
+                                                {% for motifBV in motifBVs %}                                                                           
+                                               <option {% if motifBV.name is defined and motifBV.name == motifBV_form %} selected {% endif %} value="{{motifBV.name}}">{{motifBV.name}}</option>
+                                               {% endfor  %} 
+                                            </select>
+                                        </div>
+
+                            
+                                         <div class="form-floating">
+                                                <label for="floatingTextarea">Observations Bureau Veritas</label>
+                                                <textarea name="observations" class="form-control" placeholder="Veuillez saisir une action" id="floatingTextarea">{% if observations is defined %} {{observations}} {% endif %}</textarea>                                         
+                                        </div>
+                                        
+                                        <!-- Pilote -->
+                                        <div class="mb-3">
+                                          <label for="exampleFormControlSelect1">Pilote</label>
+                                          <select name="pilote" class="form-control" id="exampleFormControlSelect1">
+                                              <option value="">Néant</option>
+                                              {% for pilote in pilotes %}                                                                           
+                                               <option {% if pilote.name is defined and pilote.name == pilote_form %} selected {% endif %} value="{{pilote.name}}">{{pilote.name}}</option>
+                                               {% endfor  %} 
+                                          </select>
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Délais</label>
+                                        <input {% if delais is defined %} value="{{delais}}" {% endif %} name="delais" class="form-control" type="date" placeholder="Default input">
+                                    </div>
+
+                                    <div class="mb-3">
+                                      <label for="floatingTextarea">Action à mettre en place</label>
+                                      <textarea name="actions" class="form-control" placeholder="Veuillez saisir l'action" id="floatingTextarea">{% if actions is defined %} {{actions}} {% endif %}</textarea>     
+                                  </div>
+
+                        </div>  
+
+
+                                        <div class="form-floating">
+                                          <label for="floatingTextarea">Commentaire</label>
+                                          <textarea name="commentaire" class="form-control" placeholder="Veuillez saisir un commentaire" id="floatingTextarea">{% if commentaire is defined %} {{commentaire}} {% endif %}</textarea>                                         
+                                  </div>
+
+
+
+                                        <div class="custom-file mt-2">
+                                           <label>  Dernier Rapport Bureau Véritas:  </label>
+                                            <input  type="file" name="rapportbv"  id="file1" >  
+                                           
+                                          
+                                          </div>
+
+                                          <div class="custom-file mt-2">
+                                         
+                                           <label> 
+                                           {% if notification7 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon>{% endif %}  
+                                            {% if notification8 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon>{% endif %}  Déclaration de conformité: 
+                                            <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                             <span class="difftelma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                           </label>
+                                            
+                                            <input name="certificate" type="file" id="file2">
+                                            
+                                          </div>
+
+                                          <div class="custom-file mt-2">
+                                     
+                                           <label> 
+                                           {% if notification7 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon>{% endif %}   
+                                           {% if notification8 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon>{% endif %}   Fiche d’adéquation:
+                                           <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                           <span class="difftelma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                           </label>
+                                            
+                                            <input name="adequation" id="file3" type="file">
+                                            
+                                          </div>
+
+                                       
+
+                                          <div class="custom-file mt-2">
+                                           <label> 
+                                           {% if notification7 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon> {% endif %} 
+                                            {% if notification8 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon>{% endif %}  Rapport de mise en service:                                            
+                                            <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                             <span class="difftelma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                           </label>
+                                            <input name="mise_en_service" type="file" id="file4">
+                                            
+                                          </div>
+
+                                          <div class="custom-file mt-2">
+                                           <label> 
+                                           {% if notification7 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon> {% endif %} Plan:  
+                                            <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                           </label>
+                                            <input name="plan" type="file" id="file5">
+                                            
+                                          </div>
+
+                                          <div class="custom-file mt-2">
+                                           <label> 
+                                           {% if notification7 is not null %} <iconify-icon icon="fa-solid:exclamation" style="color: red;"></iconify-icon> {% endif %} Note de calcul: 
+                                            <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>
+                                           </label>
+                                            <input type="file"  name="note_de_calcul" id="file6">
+                                            
+                                          </div>
+
+                                           <div class="custom-file mt-2 ">
+                                           <label>Image du moyen:</label>
+                                           <input name="img_moyen" type="file" id="file7">
+                                            
+                                          </div>
+
+                                     
+                                        <button type="submit" name="envoyer" id="envoyer" class="btn btn-primary mt-3">Soumettre</button>
+                                    </form>
+                                </div>
+         
+
+       <script src="{{asset('assets/js/jquery.js')}}"></script>
+
+        <script>
+
+         //    var motADisparaitre = document.getElementById("motADisparaitre");
+        //        motADisparaitre.style.display = "none";
+
+                 var motsADisparaitre = document.getElementsByClassName("numero_cmu");
+                 for (var i = 0; i < motsADisparaitre.length; i++) {
+                    motsADisparaitre[i].style.display = "none";
+                 }
+
+                 var motsADisparaitre2 = document.getElementsByClassName("telma");
+                 for (var i = 0; i < motsADisparaitre2.length; i++) {
+                    motsADisparaitre2[i].style.display = "none";
+                 }
+
+                 var motsADisparaitre3 = document.getElementsByClassName("difftelma");
+                 for (var i = 0; i < motsADisparaitre3.length; i++) {
+                    motsADisparaitre3[i].style.display = "none";
+                 }
+
+                  var motsADisparaitre4 = document.getElementsByClassName("block_action");
+                for (var i = 0; i < motsADisparaitre4.length; i++) {
+                    motsADisparaitre4[i].style.display = "none";
+                }
+
+//var elementsBlockAction = document.getElementsByClassName("block_action");
+
+// console.log(elementsBlockAction);
+   var statusMoyenSelect = document.getElementsByName("statusmoyen")[0].value;
+    var status_bv = document.getElementsByName("statusbv")[0].value; 
+
+   console.log(status_bv);    
+
+
+function handleStatusBVChange(selectElement) {
+    // Obtenez la valeur sélectionnée
+    var status_bv = selectElement.value;
+
+    // Faites quelque chose avec la valeur, par exemple, imprimez-la dans la console
+    console.log("Nouveau statut BV : " + status_bv);
+    // Vous pouvez également mettre votre logique ici en fonction de la valeur sélectionnée
+    if(status_bv=='Non-conforme')
+    {
+                for (var i = 0; i < motsADisparaitre4.length; i++) {
+                    motsADisparaitre4[i].style.display = "inline";
+                }
+    }
+    else
+    {
+           for (var i = 0; i < motsADisparaitre4.length; i++) {
+                    motsADisparaitre4[i].style.display = "none";
+                }
+    }
+
+
+
+}
+
+             
+
+                 
+
+              $("#envoyer").click(function(e){
+
+                   //  block_action       
+                         
+                           var cmu = document.getElementById("cmu").value;
+                           var numero = document.getElementById("numero").value;
+                           var rapportBV = document.getElementById("file1").value;  
+                           var certificate = document.getElementById("file2").value;  
+                           var adequation =  document.getElementById("file3").value;  
+                           var mise_en_service = document.getElementById("file4").value; 
+                           var plan = document.getElementById("file5").value;  
+                           var note_de_calcul = document.getElementById("file6").value;  
+                           var plan = document.getElementById("file7").value;    
+                           var fournisseurs  = document.getElementById("fournisseurs").value; 
+
+                        //    var status_bv = document.getElementById("block_action");    
+
+                       //     console.log(status_bv);                                       
+                          
+                           var statusMoyenSelect = document.getElementsByName("statusmoyen")[0].value; // Sélectionnez le champ select par son nom (utilisation [0] pour obtenir le premier élément si nécessaire)
+                           
+                            var status_bv = document.getElementsByName("statusbv")[0].value; 
+                          
+                       if(cmu==="" || numero==="")
+                            {
+                              //  alert("Vous inscrire la cmu ou le numero de serie");
+                              //    motADisparaitre.style.display = "inline";
+                                        for (var i = 0; i < motsADisparaitre.length; i++) {
+                                        motsADisparaitre[i].style.display = "inline"; // ou "block", selon le contexte
+                                        }
+                                        
+                                        e.preventDefault();   
+                                        
+                            }
+                            else
+                            {
+                                        for (var i = 0; i < motsADisparaitre.length; i++) {
+                                        motsADisparaitre[i].style.display = "none"; // ou "block", selon le contexte
+                                        }
+                                          e.preventDefault();   
+                            }
+
+
+                                  
+
+                            if(statusMoyenSelect==='Demande passage statut prod')
+                                {
+                                    if(fournisseurs==='TELMA')
+                                    { 
+                                              if(adequation==="" || certificate==="" || mise_en_service==="" || plan==="" || note_de_calcul==="")
+                                              {
+                                                  // alert("Vous devez mettre le certificat d'adéquation, la declaration de non conformité, et le rapport de mise en service, le plan et la note de calcul");
+                                                  for (var i = 0; i < motsADisparaitre2.length; i++) {
+                                                  motsADisparaitre2[i].style.display = "inline"; // ou "block", selon le contexte
+                                                  }
+                                                  e.preventDefault();                                               
+                                              }
+                                    }
+                                    else
+                                    {
+                                              for (var i = 0; i < motsADisparaitre2.length; i++) {
+                                                  motsADisparaitre2[i].style.display = "none"; // ou "block", selon le contexte
+                                                  }
+                                                  e.preventDefault();    
+                                    }
+                                }
+
+                               if(statusMoyenSelect==='Demande passage statut prod')
+                                {
+                                    if(fournisseurs!=='TELMA')
+                                    { 
+                                              if(adequation==="" || certificate==="" || mise_en_service==="" || plan==="" || note_de_calcul==="")
+                                              {
+                                                  // alert("Vous devez mettre le certificat d'adéquation, la declaration de non conformité, et le rapport de mise en service, le plan et la note de calcul");
+                                                  for (var i = 0; i < motsADisparaitre3.length; i++) {
+                                                  motsADisparaitre3[i].style.display = "inline"; // ou "block", selon le contexte
+                                                  }
+                                                  e.preventDefault();                                               
+                                              }
+                                    }
+                                    else
+                                    {
+                                                for (var i = 0; i < motsADisparaitre3.length; i++) {
+                                                  motsADisparaitre3[i].style.display = "none"; // ou "block", selon le contexte
+                                                  }
+                                                  e.preventDefault();  
+                                    }
+                                }
+
+
+
+                                
+                          
+                        
+                           
+          
+                       })
+
+                       
+      </script>
+
+
+
+
+
+{% endblock %}

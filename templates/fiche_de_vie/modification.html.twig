@@ -1,0 +1,495 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FicheDeVieController!{% endblock %}
+
+{% block content %}
+                                <div class="bloc_2_contenu contenu_center">
+                                    
+                                
+                                <div class="bloc_2_contenu">
+
+           
+
+                                                                   
+                                           
+                                   <!--     
+                                        <div class="bloc_2_detail">
+                                        <p> Les champs suivants sont obligatoires:
+                                         <br/>
+                                         -Rapport de mise en service  <br/>     
+                                         -Fiche d'adéquation   <br/>      
+                                         -Conformité CE
+                                         </p>
+                                         </div>
+
+
+                                          <div class="bloc_2_detail">
+                                        <p> Les champs suivants sont obligatoires:
+                                         <br/>
+                                         -Rapport de mise en service  <br/>     
+                                         -Fiche d'adéquation   <br/>      
+                                         -Conformité CE
+                                         </p>
+                                         </div>
+
+
+                                             <div class="bloc_2_detail">
+                                             <p> Le numero du moyen est manquant
+                                             </p>
+                                             </div>
+                                    </div>
+                                  -->
+
+                                  {% if notification1 is not null %}
+                                   <div class="bloc_2_detail">
+                                             <div class="alert alert-warning" role="alert">
+                                                {{notification1}}
+                                             </div>  
+                                         </div>
+                                   {% endif %}
+
+
+                                    
+                                    {% if notification_validation_maintenance is not null %}
+                                     <div class="bloc_2_detail">
+                                                <div class="alert alert-info" role="alert">   
+                                                <p>{{notification_validation_maintenance}}</p>
+                                                </div>
+                                    </div>
+                                    {% endif %}
+
+                                    
+                                    {% if notification_validation_qualite is not null %}
+                                    <div class="bloc_2_detail">
+                                                  <div class="alert alert-info" role="alert">  
+                                                  <p>{{notification_validation_qualite}}</p>
+                                                  </div>
+                                    </div>
+                                    {% endif %}
+
+                                     
+
+                                     <form action="" method="POST" enctype="multipart/form-data">
+
+                                          <div class="mb-3">
+                                                <p>{{numero_bdd}}</p>
+                                        </div>
+
+                                        <div class="mb-3">
+                                                <img src="{{asset('assets/img/pince.jpg')}}" class="grande_image_pince" alt="">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Description du moyen</label>                                            
+
+                                       <select  {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} name="description" class="form-control" id="exampleFormControlSelect1">
+
+                                                      <option value="{{description_bdd}}">{{description_bdd}}</option>
+                                                    {% for DescriptionMoyen in DescriptionMoyens  %}
+                                                    <option  {% if DescriptionMoyen.name is defined and DescriptionMoyen.name == description_bdd %} selected {% endif %}   value="{{DescriptionMoyen.name}}">{{DescriptionMoyen.name}}</option>
+                                                    {% endfor  %} 
+                                       </select>
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">CMU</label>                                       
+                                         <input {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} {% if cmu_bdd is defined %} value="{{cmu_bdd}}" {% endif %} class="form-control" name="cmu" type="number" placeholder="Veuillez saisir la CMU">
+                                        </div>
+
+                                          <div class="mb-3">
+                                                            <label for="exampleFormControlSelect1">Zone / Service</label>
+                                                        <select class="form-control" name="zone_service" id="exampleFormControlSelect1">                                           
+                                                            
+                                                             <option value="{{zoneservice_bdd}}">{{zoneservice_bdd}}</option>
+                                                            {% for zone_service in zone_services  %}
+                                                                  <!--  {% if zoneservice_bdd is defined and zone_service.name != zoneservice_bdd %} <option selected value="{{zoneservice_bdd}}">{{zoneservice_bdd}}</option> {% endif %}  -->
+                                                                    <option {% if zone_service.name is defined and zone_service.name == zoneservice_bdd %} selected {% endif %}  value="{{zone_service.name}}">{{zone_service.name}}</option>
+                                                            {% endfor  %} 
+                                            </select>
+
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Fournisseurs</label>
+                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="fournisseurs" id="exampleFormControlSelect1">
+                                                          
+                                                          <option value="{{fournisseurs_bdd}}">{{fournisseurs_bdd}}</option>
+                                                          {% for fournisseur in fournisseurs  %}
+                                                                  <!--  {% if fournisseurs_bdd is defined and fournisseur.name != fournisseurs_bdd %} <option selected value="{{fournisseurs_bdd}}">{{fournisseurs_bdd}}</option> {% endif %}  -->
+                                                                    <option {% if fournisseur.name is defined and fournisseur.name == fournisseurs_bdd %} selected {% endif %}  value="{{fournisseur.name}}">{{fournisseur.name}}</option>
+                                                            {% endfor  %} 
+
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Emplacement exact</label>
+                                            <select class="form-control" name="emplacement" id="exampleFormControlSelect1">
+
+                                                        <option value="{{emplacements_bdd}}">{{emplacements_bdd}}</option>
+                                                      {% for emplacement in emplacements  %}
+                                                                          <!--  {% if emplacements_bdd is defined and emplacement.name != emplacements_bdd %} <option selected value="{{emplacements_bdd}}">{{emplacements_bdd}}</option> {% endif %} -->
+                                                                            <option {% if emplacement.name is defined and emplacement.name == emplacements_bdd %} selected {% endif %}  value="{{emplacement.name}}">{{emplacement.name}}</option>
+                                                      {% endfor  %} 
+
+
+                                            </select>
+                                        </div>
+
+                                      <!-- Condition  Status du moyen -->
+                                      {% if statusDuMoyen_bdd == 'En production' and app.user.administrateur==false %}
+
+                                           <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Status du moyen</label>
+                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
+
+                                                     <option value="{{statusDuMoyen_bdd}}">{{statusDuMoyen_bdd}}</option>
+                                                     {% for statusDuMoyen in statusDuMoyens  %}
+
+                                                                       <!--    {% if statusDuMoyen_bdd is defined and statusDuMoyen.name != statusDuMoyen_bdd %} <option selected value="{{statusDuMoyen_bdd}}"> {{statusDuMoyen_bdd}} </option> {% endif %}  -->
+                                                                            <option {% if statusDuMoyen.name is defined and statusDuMoyen.name == statusDuMoyen_bdd %} selected {% endif %}  value="{{statusDuMoyen.name}}">{{statusDuMoyen.name}}</option>
+                                                      {% endfor  %} 
+
+                                            </select>
+                                        </div>
+
+                                      {% elseif statusDuMoyen_bdd !='En production' and app.user.administrateur==false %}
+
+
+                                                 <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Status du moyen</label>
+                                            <select  class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
+
+                                                     <option value="{{statusDuMoyen_bdd}}">{{statusDuMoyen_bdd}}</option>
+                                                     {% for statusDuMoyen2 in statusDuMoyen2s  %}
+
+                                                                       <!--    {% if statusDuMoyen_bdd is defined and statusDuMoyen2.name != statusDuMoyen_bdd %} <option selected value="{{statusDuMoyen_bdd}}"> {{statusDuMoyen_bdd}} </option> {% endif %}  -->
+                                                                            <option {% if statusDuMoyen2.name is defined and statusDuMoyen2.name == statusDuMoyen_bdd %} selected {% endif %}  value="{{statusDuMoyen2.name}}">{{statusDuMoyen2.name}}</option>
+                                                      {% endfor  %} 
+
+                                            </select>
+                                        </div>
+
+
+                                      {% else %}
+
+
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Status du moyen</label>
+                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
+
+                                                     <option value="{{statusDuMoyen_bdd}}">{{statusDuMoyen_bdd}}</option>
+                                                     {% for statusDuMoyen in statusDuMoyens  %}
+
+                                                                       <!--    {% if statusDuMoyen_bdd is defined and statusDuMoyen.name != statusDuMoyen_bdd %} <option selected value="{{statusDuMoyen_bdd}}"> {{statusDuMoyen_bdd}} </option> {% endif %}  -->
+                                                                            <option {% if statusDuMoyen.name is defined and statusDuMoyen.name == statusDuMoyen_bdd %} selected {% endif %}  value="{{statusDuMoyen.name}}">{{statusDuMoyen.name}}</option>
+                                                      {% endfor  %} 
+
+                                            </select>
+                                        </div>
+
+
+                                      {% endif %}
+
+                                           <!-- Condition  Status du moyen -->
+
+
+
+
+ 
+                                   
+
+
+
+                                        
+
+                                     
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Date de vérification Bureau Véritas</label>
+                                             <input {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} value="{{dateverifbv}}" name="dateverifbv"  class="form-control" type="date" placeholder="Default input">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect1">Status Bureau Veritas</label>
+                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="statusbv" id="exampleFormControlSelect1">
+
+                                                <option value="{{statusBV_bdd}}">{{statusBV_bdd}}</option>
+                                               {% for statusBV in statusBVs  %}
+                                                                         <!--   {% if statusBV_bdd is defined and statusBV.name != statusBV_bdd %} <option selected value="{{statusBV_bdd}}">{{statusBV_bdd}}</option> {% endif %} -->
+                                                                            <option {% if statusBV.name is defined and statusBV.name == statusBV_bdd %} selected {% endif %}  value="{{statusBV.name}}">{{statusBV.name}}</option>
+                                               {% endfor  %} 
+
+                                            </select>
+
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                          <label for="exampleFormControlSelect1">Motif Bureau Veritas</label>                                          
+                                          <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="motifBV" id="exampleFormControlSelect1">
+                                                      
+                                                      <option value="{{motifBVs_bdd}}">{{motifBVs_bdd}}</option>
+                                                       {% for motifBV in motifBVs  %}
+                                                                          <!--  {% if motifBVs_bdd is defined and motifBV.name != statusBV_bdd %} <option selected value="{{motifBVs_bdd}}">{{motifBVs_bdd}}</option> {% endif %} -->
+                                                                            <option {% if motifBV.name is defined and motifBV.name == motifBVs_bdd %} selected {% endif %}  value="{{motifBV.name}}">{{motifBV.name}}</option>
+                                                      {% endfor  %} 
+                                                      
+                                          </select>
+                                      </div>
+
+                                      <div class="form-floating">
+                                        <label for="floatingTextarea">Observations Bureau Veritas</label>
+                                        <textarea {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} name="observations" class="form-control" placeholder="Veuillez saisir une action" id="floatingTextarea">{% if observations is defined %} {{observations}} {% endif %}</textarea>                                                                              
+                                </div>
+
+                                <div class="mb-3">
+                                  <label for="exampleFormControlSelect1">Pilote</label>
+                                  <select class="form-control" name="pilote" id="exampleFormControlSelect1">
+
+                                                      <option value="{{pilotes_bdd}}">{{pilotes_bdd}}</option>
+                                                      {% for  pilote in pilotes  %}
+                                                                         <!--   {% if pilotes_bdd is defined and pilote.name != statusBV_bdd %} <option selected value="{{pilotes_bdd}}">{{pilotes_bdd}}</option> {% endif %}  -->
+                                                                            <option {% if pilote.name is defined and pilote.name == pilotes_bdd %} selected {% endif %}  value="{{pilote.name}}">{{pilote.name}}</option>
+                                                      {% endfor  %} 
+
+                                  </select>
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Délais</label>
+                                  <input value="{{delais_bdd}}" name="delais" class="form-control" type="date" placeholder="Default input">
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="floatingTextarea">Action à mettre en place</label>
+                                <textarea name="actions" class="form-control" placeholder="Veuillez saisir l'action" id="floatingTextarea">{% if action_bdd is defined %} {{action_bdd}} {% endif %}</textarea>      
+                          </div>
+
+                                        <div class="form-floating">
+                                                <label for="floatingTextarea">Commentaire</label>
+                                                <textarea name="commentaire" class="form-control" placeholder="Veuillez saisir un commentaire" id="floatingTextarea">{% if commentaire is defined %} {{commentaire}} {% endif %}</textarea>                                                                                 
+                                        </div>
+                                     
+
+                                    
+
+                                          <div class="custom-file mt-2">
+                                                                                                                    
+                                                
+                                                    {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}                                                           
+                                                           
+                                                               <label>Dernier Rapport Bureau Véritas</label>
+                                                             {% if rapport is not empty and rapport is not null  %} 
+                                                             <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                             {% endif %}
+                                                                                                                       
+                                                    {% else %}  
+                                                            
+                                                          
+                                                                  <label>Dernier Rapport Bureau Véritas</label>
+                                                              {% if rapport is not empty and rapport is not null  %} 
+                                                               <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                               {% endif %}
+                                                                <input type="file" name="rapportbv"> 
+                                                           
+                                                   {% endif %}                                                 
+                                                                                  
+                                          </div>
+
+                                       
+
+
+
+                                       
+
+                                      <div class="custom-file mt-2">                                                                                          
+
+                                         {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}                                                     
+                                                
+                                                     <label>Déclaration de conformité:</label>  
+                                                     {% if certificat is not empty and certificat is not null %} 
+                                                     <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>    
+                                                     {% endif %}                                              
+                                              
+                                          {% else %}                                                     
+                                                     
+                                                      <label>Déclaration de conformité:</label>
+                                                      {% if certificat is not empty and certificat is not null %} 
+                                                      <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                      {% endif %}   
+                                                     <input type="file" name="certificate"> 
+                                                                                          
+                                                {% endif %}    
+                                          </div>
+
+                                          
+
+
+
+                                          
+
+                                          <div class="custom-file mt-2">                                               
+
+                                                 {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                        
+                                             
+                                                 <label>Fiche d’adéquation</label>
+                                                {% if ficheadequation is not empty and ficheadequation is not null  %}  
+                                                <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>    
+                                                {% endif %}  
+
+                                                                                       
+                                               
+                                                 {% else %}                                                          
+                                              
+                                                 <label>Fiche d’adéquation</label>
+                                                  {% if ficheadequation is not empty and ficheadequation is not null  %}          
+                                                 <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                 {% endif %} 
+                                                 <input type="file" name="adequation">
+
+                                                  {% endif %}    
+                                        </div>
+
+                                        
+                                          
+
+                                          <div class="custom-file mt-2">                                                
+
+                                                     {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                            
+                                                           
+                                                             <label>Rapport de mise en service</label>
+                                                             {% if mise_en_service is not empty and mise_en_service is not null  %} 
+                                                             <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                             {% endif %}   
+                                                           
+
+                                                     {% else %}   
+                                                              
+                                                          
+                                                             <label>Rapport de mise en service</label>
+                                                              {% if mise_en_service is not empty and mise_en_service is not null  %} 
+                                                             <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                              {% endif %}
+                                                             <input type="file" name="mise_en_service">                                                             
+                                                           
+                                                                                       
+                                                     {% endif %}    
+                                          </div>
+
+                                            
+
+
+
+                                           
+
+                                          <div class="custom-file mt-2">                                                
+                                                  
+                                                  {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                        
+                                                       
+                                               <label>Plan</label>
+                                               {% if plan is not empty and plan is not null  %}
+                                               <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                               {% endif %} 
+                                                     
+                                                  {% else %}   
+                                                         
+                                                        
+                                                         <label>Plan</label>
+                                                {% if plan is not empty and plan is not null  %}
+                                              <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                              {% endif %} 
+                                                         <input type="file" name="plan">   
+
+                                                 {% endif %}                                       
+                                               
+                                          </div>
+
+                                          
+                                          
+                                          
+                                         
+                                          
+                                          <div class="custom-file mt-2">                                                 
+                                                 
+                                                    {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}                                                             
+                                                               
+                                                            <label>Note de calcul</label>
+                                                            {% if notedecalcul is not empty and notedecalcul is not null  %} 
+                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                            {% endif %} 
+                                                                      
+                                                            {% else %}                                                              
+                                                                      
+                                                            <label>Note de calcul</label>
+                                                             {% if notedecalcul is not empty and notedecalcul is not null  %} 
+                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                            {% endif %} 
+                                                                        
+                                                            <input type="file"name="note_de_calcul"> 
+                                                 
+                                                      {% endif %}
+                                                  
+                                                                                                                                               
+                                          </div>
+
+                                      
+
+                                          
+                                        
+
+                                          <div class="custom-file mt-2 ">
+
+                                                     {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                               
+                                                             
+                                                            <label>Image du moyen</label>  
+                                                            {% if imagemoyen is not empty and imagemoyen is not null  %} 
+                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                            {% endif %}  
+                                                                        
+
+                                                              {% else %}  
+                                                                
+                                                            
+                                                            <label>Image du moyen</label> 
+                                                           {% if imagemoyen is not empty and imagemoyen is not null  %} 
+                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                            {% endif %}  
+                                                                    
+                                                              <input type="file" name="img_moyen">
+
+                                                     {% endif %}  
+                                           
+                                          </div>  
+
+                                       
+
+
+
+                                           {% if app.user.administrateur==false %}
+
+                                            <input type="hidden" name="status_de_ladmin" value="pas_admin" />
+
+                                           {% else %}
+
+                                              <input type="hidden" name="status_de_ladmin" value="admin" />
+
+                                           {% endif %}
+                                       
+                                       
+                                        
+                                        <button type="submit" value="mise_a_jour_moyen" name="mise_a_jour_moyen" class="btn btn-primary mt-3">Mettre à jour le moyen</button>
+
+                                          {% if app.user.fonction == 'MAINTENANCE' and approbationmaintenance == 0 and statusDuMoyen_bdd == 'Demande passage statut prod' %}   <button type="submit" value="validation_moyen_maintenance" name="validation_moyen" class="btn btn-primary mt-3">Valider le moyen</button> {% endif %}
+                                          {% if app.user.fonction == 'QUALITE' and approbationqualite == 0 and statusDuMoyen_bdd == 'Demande passage statut prod' %}   <button type="submit" value="validation_moyen_qualite" name="validation_moyen" class="btn btn-primary mt-3">Valider le moyen</button>         {% endif %}
+                                         
+                                    </form>
+                                </div>
+         
+
+{% endblock %}

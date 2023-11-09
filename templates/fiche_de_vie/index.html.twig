@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FicheDeVieController!{% endblock %}
+
+{% block content %}
+                                <div class="bloc_2_contenu contenu_center">
+                                   
+                            <!--
+                                   <div class="bloc_2_detail">
+                                   <p> Les champs suivants sont obligatoires:
+                                    <br/>
+                                    -Plan    <br/>
+                                    -Note de calcul   <br/> 
+                                    -Certificat d’adéquation  <br/>     
+                                    -Rapport de mise en service    <br/>      
+                                    -Conformité CE
+                                    </p>
+                                    </div>
+
+                                    <div class="bloc_2_detail">
+                                        <p> Les champs suivants sont obligatoires:
+                                         <br/>
+                                         -Rapport de mise en service  <br/>     
+                                         -Fiche d'adéquation   <br/>      
+                                         -Conformité CE
+                                         </p>
+                                         </div>
+
+                                         <div class="bloc_2_detail">
+                                            <p> Le numero du moyen est manquant
+                                             </p>
+                                             </div>
+                                </div>
+                                -->
+                                
+                                <div class="bloc_2_contenu">
+
+           
+
+                                    <form action="{{path('app_fiche_de_vie')}}" method="POST">
+
+                                              <div class="mb-3">
+                                              <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                              <input class="form-control" name="numero_serie" type="text" placeholder="Veuillez saisir le numero de serie">
+                                              </div>
+
+                                              <div class="mb-3">
+                                              <button type="submit" name="recherche" class="btn btn-primary mt-3">Rechercher le moyen</button>
+                                              </div>
+
+                                    </form>
+
+                                     
+
+                                    {% if resultat_recherches != [] %}
+
+                                    <div class="alert alert-info" role="alert">
+                                   
+               
+
+                                     {% for resultat_recherche in resultat_recherches  %}
+                                            <p><a href="{{path('fiche_de_vie_modification',{'numero':resultat_recherche.numero})}}">{{resultat_recherche.numero}}</a></p>
+                                      {% endfor  %}                                      
+
+
+
+                                    </div>
+
+                                     {% endif %}
+
+                                    
+                                </div>
+         
+
+{% endblock %}

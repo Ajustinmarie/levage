@@ -1,0 +1,305 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConsulterController!{% endblock %}
+
+{% block content %}
+
+                                       
+                           
+                       <div class="bloc_2_cont reduction">
+
+                                          
+                                        
+                           
+                                        <div class="bloc_2_contant">
+                                              
+                                             
+
+
+                                                      <form action="#" method="POST">          
+                                                                                  <div class="mb-3">
+                                                                                      <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                                                      <input {% if numero is defined %} value="{{numero}}" {% endif %}  class="form-control" type="text" name="numero" placeholder="">
+                                                                                  </div> 
+
+                                                                                                                                                                 
+                                                                                    <!-- ZONE / SERVICE -->
+                                                                                  <div class="mb-3">
+                                                                                    <label for="exampleFormControlSelect1">Zone / Service</label>
+                                                                                        <select name="zone_service" class="form-control" id="exampleFormControlSelect1">
+                                                                                              {% for zone_service in zone_services  %}
+                                                                                              <option {% if zone_service.zoneservice is defined and zone_service.zoneservice == zone_service_form %} selected {% endif %}  value="{{zone_service.zoneservice}}">{{zone_service.zoneservice}}</option>
+                                                                                              {% endfor  %} 
+                                                                                        </select>
+                                                                                  </div>
+
+                                                                                
+                                                                                  
+                                                                                   <!-- EMPLACEMENT -->
+                                                                                  <div class="mb-3">
+                                                                                    <label for="exampleFormControlSelect1">Emplacement exact</label>
+                                                                                    <select name="emplacement" class="form-control" id="exampleFormControlSelect1">
+                                                                                            {% for emplacement in emplacements %}                                                                           
+                                                                                            <option  {% if emplacement.emplacement is defined and emplacement.emplacement == emplacement_form %} selected {% endif %}  value="{{emplacement.emplacement}}">{{emplacement.emplacement}}</option>
+                                                                                            {% endfor  %} 
+                                                                                    </select>
+                                                                                    </div>
+
+                                                                                  
+                                                                                    
+                                                                                    <!-- FOURNISSEURS -->
+                                                                                    <div class="mb-3">
+                                                                                      <label for="exampleFormControlSelect1">Fournisseurs</label>
+                                                                                      <select name="fournisseurs" class="form-control" id="exampleFormControlSelect1">
+                                                                                         {% for fournisseur in fournisseurs %}
+                                                                                         <option {% if fournisseur.fournisseur is defined and fournisseur.fournisseur == fournisseurs_form %} selected {% endif %}  value="{{fournisseur.fournisseur}}">{{fournisseur.fournisseur}}</option>
+                                                                                         {% endfor  %} 
+                                                                                      </select>
+                                                                                    </div>
+
+                                        </div>
+                                        
+
+                                        <div class="bloc_2_contant">
+                                                    
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">CMU < </label>
+                                                        <input {% if cmuinf is defined %} value="{{cmuinf}}" {% endif %} name="cmuinf" class="form-control" type="number" placeholder="">
+                                                    </div> 
+
+                                                                                                       
+                                                     <!-- DESCRIPTION DU MOYEN -->
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Description du moyen</label>
+                                                      <select name="description" class="form-control" id="exampleFormControlSelect1">
+                                                            {% for DescriptionMoyen in DescriptionMoyens  %}
+                                                            <option {% if DescriptionMoyen.description is defined and DescriptionMoyen.description == description_form %} selected {% endif %} value="{{DescriptionMoyen.description}}" >{{DescriptionMoyen.description}}</option>
+                                                            {% endfor  %} 
+                                                      </select>
+                                                    </div>                                                     
+
+
+                                                      <!-- STATUS DU MOYEN -->
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Status du moyen</label>
+                                                      <select name="statusmoyen" class="form-control" id="exampleFormControlSelect1">
+                                                         {% for statusDuMoyen in statusDuMoyens %}                                                                           
+                                                             <option {% if statusDuMoyen.statusmoyen is defined and statusDuMoyen.statusmoyen == statusmoyen_form %} selected {% endif %} value="{{statusDuMoyen.statusmoyen}}" >{{statusDuMoyen.statusmoyen}}</option>
+                                                         {% endfor  %} 
+                                                      </select>
+                                                    </div>
+
+                                                                                                        
+                                                      <!-- STATUS DU BV -->
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Status Bureau Veritas</label>
+                                                      <select  name="statusbv" class="form-control" id="exampleFormControlSelect1">
+                                                           {% for statusBV in statusBVs %}                                                                           
+                                                                    <option {% if statusBV.statut_bv is defined and statusBV.statut_bv == statusbv_form %} selected {% endif %} value="{{statusBV.statut_bv}}" >{{statusBV.statut_bv}}</option>
+                                                            {% endfor  %}  
+                                                      </select>
+                                                  </div>
+
+                                                  
+                                                        
+
+                                        </div>
+
+
+                                        <div class="bloc_2_contant">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">CMU ></label>
+                                                        <input {% if cmusupp is defined %} value="{{cmusupp}}" {% endif %} name="cmusupp" class="form-control" type="number" placeholder="">
+                                                    </div> 
+
+
+                                                     <!-- MOTIF BV -->
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Motif Bureau Veritas</label>
+                                                      <select name="motifBV" class="form-control" id="exampleFormControlSelect1">
+                                                                {% for  motifBV in  motifBVs %}                                                                           
+                                                                    <option {% if motifBV.motifbv is defined and motifBV.motifbv == motifBV_form %} selected {% endif %} value="{{motifBV.motifbv}}" >{{motifBV.motifbv}}</option>
+                                                               {% endfor  %}                                                            
+                                                      </select>
+                                                  </div>
+
+
+                                                   
+                                                
+                                                  <div class="mb-3">
+                                                  <label for="exampleFormControlSelect1">Pilote de cloture Action</label>
+                                                  <select name="pilote" class="form-control" id="exampleFormControlSelect1">
+                                                      {% for pilote in pilotes %}                                                                           
+                                                              <option {% if pilote.pilotecloture is defined and pilote.pilotecloture == pilote_form %} selected {% endif %}  value="{{pilote.pilotecloture}}" >{{pilote.pilotecloture}}</option>
+                                                     {% endfor  %} 
+                                                  </select>
+                                                </div>
+
+
+                                                <div class="mb-3">
+                                                  <label for="exampleInputEmail1" class="form-label">Délais de cloture actions</label>
+                                                  <input {% if delais is defined %} value="{{delais}}" {% endif %} name="delais" class="form-control" type="date" placeholder="Default input">
+                                              </div>
+
+                                                  
+                                                <!--    
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div> 
+                                                -->                                       
+                                        </div>
+                                                        
+                      <!--
+                                        <div class="bloc_2_contant">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                            </div> 
+                                            
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                             </div>
+
+                                             <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                              </div>
+
+                                              <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                              </div>
+                                       </div>
+                            -->
+                           
+                       </div>
+
+                     <div class="bloc_2_bouton_centre">                    
+                                             <div class="alert alert-warning" role="alert">
+                                             {{notification1}}
+                                             </div>                      
+                     </div>
+                      
+
+                    <div class="bloc_2_bouton_centre">
+                        <button type="submit" class="btn btn-primary mt-3">Soumettre</button>                  
+                     </div>
+
+        </form> 
+
+
+
+                                    <div class="bloc_2_cont">
+                                                <div class="bloc_2_inter_contenant">
+                                                <h1>Résultat de la recherche</h1>
+                                                </div>
+                                    </div>
+
+
+
+
+                                                    <div class="new_bloc">
+                                
+                                                        <div class="bloc_2_inter_contenanto">
+                                                                        
+                                                            <table class="table">
+                                                                <thead class="head_color">
+                                                                  <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">N° moyen</th>
+                                                                    <th scope="col">Description Moyen</th>
+                                                                    <th scope="col">Emplacement</th>
+                                                                    <th scope="col">Statut du moyen</th>
+                                                                    <th scope="col">Statut Bureau Veritas</th>
+                                                                    <th scope="col"></th>
+                                                                    <th scope="col"></th>
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                    <td>@mdo</td>
+                                                                    <td>@mdo</td>
+                                                                    <td><a href="visuelle_levage.html"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                    <td>@fat</td>
+                                                                    <td>@mdo</td>
+                                                                  <td><a href="visuelle_levage.html"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@mdo</td>
+                                                                     <td><a href="visuelle_levage.html"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <th scope="row">4</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@mdo</td>
+                                                                     <td><a href="visuelle_levage.html"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+
+                                                                  <tr>
+                                                                    <th scope="row">5</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@mdo</td>
+                                                                      <td><a href="visuelle_levage.html"><img src="{{asset('assets/img/fluent-mdl2_see-do.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="{{asset('assets/img/material-symbols_delete.png')}}" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                              
+                                                         
+                                                         
+                                            
+                                                    </div>
+
+                                                 
+                                                
+                                                
+                                                </div>
+
+
+                     
+
+
+                                                
+                   
+                                     
+                                    
+           
+
+{% endblock %}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz@16..144&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz@16..144&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+<div id="MAIN">
+
+           <div id="bloc_1">
+                        
+                    <div class="bloc_1_contenu"><img src="img/logo-telma.png" class="logo" alt=""></div>
+
+                    <div class="bloc_1_contenu licence"><p>Administrateur</p></div>
+
+                    <div class="bloc_1_contenu">
+                                                <div id="bloc_1_content">
+                                                   <div class="bloc_1_contenant"><img src="img/bx_user-circle.png" alt="" class="icone_user"></div>
+                                                   <div class="bloc_1_contenant">Jacques David</div>
+                                                </div>
+                    </div>
+
+                    <div class="bloc_1_contenu"><a href="accueil.html">Accueil</a></div>
+
+                    <div class="bloc_1_contenu"><a href="index.html">Enregistrer un nouveau moyen</a></div>
+
+                    <div class="bloc_1_contenu"><a href="#">Consulter tous les moyens</a></div>
+
+                    <div class="bloc_1_contenu"><a href="">Tableau de bord</a></div>
+
+                    <div class="bloc_1_contenu"><a href="mise_a_jour.html">Mise a jour fiche de vie</a></div>
+
+                    <div class="bloc_1_contenu"><a href="valider_moyen.html">Valider un moyen</a></div>
+
+           <!--        <div class="bloc_1_contenu"><a href="">Moyen en cours de validation</a></div>   --> 
+
+            <!--       <div class="bloc_1_contenu"><a href="">Procedure</a></div>   --> 
+
+                    <div class="bloc_1_contenu"><a href="">Parametres</a></div>                   
+
+
+                    <div class="bloc_1_contenu"><a href="">Deconnexion</a></div>
+
+            
+           </div>
+
+
+          
+            
+           <div id="bloc_2">
+                           
+                       <div class="bloc_2_cont reduction">
+                               
+                           
+                                        <div class="bloc_2_contant">
+                                                      <form action="http://127.0.0.1:5500/" method="POST">          
+                                                                                  <div class="mb-3">
+                                                                                      <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                                                      <input class="form-control" type="text" placeholder="Default input">
+                                                                                  </div> 
+                                                                                  
+                                                                                  <div class="mb-3">
+                                                                                    <label for="exampleFormControlSelect1">Zone / Service</label>
+                                                                          <select class="form-control" id="exampleFormControlSelect1">
+                                                                            <option>1</option>
+                                                                            <option>2</option>
+                                                                            <option>3</option>
+                                                                            <option>4</option>
+                                                                            <option>5</option>
+                                                                          </select>
+                                                                                  </div>
+
+                                                                                  <div class="mb-3">
+                                                                                    <label for="exampleFormControlSelect1">Emplacement exact</label>
+                                                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                                                      <option>1</option>
+                                                                                      <option>2</option>
+                                                                                      <option>3</option>
+                                                                                      <option>4</option>
+                                                                                      <option>5</option>
+                                                                                    </select>
+                                                                                    </div>
+
+                                                                                    <div class="mb-3">
+                                                                                      <label for="exampleFormControlSelect1">Fournisseurs</label>
+                                                                                      <select class="form-control" id="exampleFormControlSelect1">
+                                                                                        <option>1</option>
+                                                                                        <option>2</option>
+                                                                                        <option>3</option>
+                                                                                        <option>4</option>
+                                                                                        <option>5</option>
+                                                                                      </select>
+                                                                                    </div>
+
+                                        </div>
+                                        
+
+                                        <div class="bloc_2_contant">
+                                                    
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">CMU</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div> 
+                                                    
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Description du moyen</label>
+                                                      <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                      </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Status du moyen</label>
+                                                      <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                      </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Status Bureau Veritas</label>
+                                                      <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                      </select>
+                                                  </div>
+
+                                                  
+                                                        
+
+                                        </div>
+
+
+                                        <div class="bloc_2_contant">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">CMU</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div> 
+
+
+                                                    <div class="mb-3">
+                                                      <label for="exampleFormControlSelect1">Motif Bureau Veritas</label>
+                                                      <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option></option>
+                                                        <option>Apparaux non trouvé</option>
+                                                        <option>Manque protection sur cable</option>
+                                                        <option>Rapport et doc indisponible</option>
+                                                        <option>Plaque contructeur illisible</option>
+                                                        <option>Aucun numéro de serie</option>
+                                                        <option>Moyen HS</option>
+                                                        <option>Manque vis prisonière</option>
+                                                      </select>
+                                                  </div>
+                                                
+                                                  <div class="mb-3">
+                                                  <label for="exampleFormControlSelect1">Pilote</label>
+                                                  <select class="form-control" id="exampleFormControlSelect1">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                  </select>
+                                                </div>
+
+
+                                                <div class="mb-3">
+                                                  <label for="exampleInputEmail1" class="form-label">Délais</label>
+                                                  <input class="form-control" type="date" placeholder="Default input">
+                                              </div>
+
+                                                  
+                                                <!--    
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                        <input class="form-control" type="text" placeholder="Default input">
+                                                    </div> 
+                                                -->                                       
+                                        </div>
+                                                        
+                      <!--
+                                        <div class="bloc_2_contant">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                            </div> 
+                                            
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                             </div>
+
+                                             <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                              </div>
+
+                                              <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Numero du moyen de levage</label>
+                                                <input class="form-control" type="text" placeholder="Default input">
+                                              </div>
+                                       </div>
+                            -->
+                           
+                       </div>
+                      
+
+                        <div class="bloc_2_bouton_centre">
+                        <button type="submit" class="btn btn-primary mt-3">Soumettre</button>
+                     
+                     </div>
+
+        </form> 
+
+
+
+                                    <div class="bloc_2_cont">
+                                                <div class="bloc_2_inter_contenant">
+                                                <h1>Résultat de la recherche</h1>
+                                                </div>
+                                    </div>
+
+
+
+
+                                                    <div class="new_bloc">
+                                
+                                                        <div class="bloc_2_inter_contenanto">
+                                                                        
+                                                            <table class="table">
+                                                                <thead class="head_color">
+                                                                  <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">N° moyen</th>
+                                                                    <th scope="col">Description Moyen</th>
+                                                                    <th scope="col">Emplacement</th>
+                                                                    <th scope="col">Statut du moyen</th>
+                                                                    <th scope="col">Statut Bureau Veritas</th>
+                                                                    <th scope="col"></th>
+                                                                    <th scope="col"></th>
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                    <td>@mdo</td>
+                                                                    <td>@mdo</td>
+                                                                    <td><a href="visuelle_levage.html"><img src="img/fluent-mdl2_see-do.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="img/material-symbols_delete.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                    <td>@fat</td>
+                                                                    <td>@mdo</td>
+                                                                    <td><a href="visuelle_levage.html"><img src="img/fluent-mdl2_see-do.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="img/material-symbols_delete.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@mdo</td>
+                                                                    <td><a href="visuelle_levage.html"><img src="img/fluent-mdl2_see-do.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="img/material-symbols_delete.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                    <th scope="row">4</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@mdo</td>
+                                                                    <td><a href="visuelle_levage.html"><img src="img/fluent-mdl2_see-do.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="img/material-symbols_delete.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+
+                                                                  <tr>
+                                                                    <th scope="row">5</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@twitter</td>
+                                                                    <td>@mdo</td>
+                                                                    <td><a href="visuelle_levage.html"><img src="img/fluent-mdl2_see-do.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                    <td><a href="#"><img src="img/material-symbols_delete.png" class="visu_icone_resultat" alt=""></a></td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                              
+                                                         
+                                                         
+                                            
+                                                    </div>
+
+                                                 
+                                                
+                                                
+                                                </div>
+
+
+                     
+
+
+                                                
+                   
+                                     
+                                    
+           </div>
+
+</div>
+
+</body>
+</html>
