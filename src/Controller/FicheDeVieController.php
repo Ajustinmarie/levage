@@ -187,8 +187,7 @@ class FicheDeVieController extends AbstractController
                 if($valider_moyen=='validation_moyen_maintenance')
                 {
                     $this->entityManager->getRepository(MoyenDeLevage::class)->upgrade_maintenance($numero);   
-                    $notification_validation_maintenance="Le moyen a bien été validé par le service maintenance";
-                   
+                    $notification_validation_maintenance="Le moyen a bien été validé par le service maintenance";                   
                     $approbationmaintenance=1;
                     
                     if($approbationmaintenance==1 AND $approbationqualite==1)

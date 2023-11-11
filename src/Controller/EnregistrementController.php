@@ -298,7 +298,7 @@ class EnregistrementController extends AbstractController
                                                     $nouveauNom4
                                                 ); 
                                                 $notification6 = 'Le moyen de levage à bien été enregistrer';
-                                                header("Refresh:3");
+                                              //  header("Refresh:3");
                                              
 
                     

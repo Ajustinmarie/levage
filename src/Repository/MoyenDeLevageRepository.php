@@ -315,7 +315,7 @@ class MoyenDeLevageRepository extends ServiceEntityRepository
               {
                     $conn = $this->getEntityManager()->getConnection();
                     $sql = "UPDATE moyen_de_levage SET 
-                    approbationmaintenance=1,              
+                    approbationmaintenance=1              
                     WHERE numero='$numero'";        
                     $stmt = $conn->prepare($sql);
                     $resultSet = $stmt->executeQuery();

@@ -351,7 +351,7 @@
    var statusMoyenSelect = document.getElementsByName("statusmoyen")[0].value;
     var status_bv = document.getElementsByName("statusbv")[0].value; 
 
-   console.log(status_bv);    
+   // console.log(status_bv);    
 
 
 function handleStatusBVChange(selectElement) {
@@ -392,13 +392,13 @@ function handleStatusBVChange(selectElement) {
                            var certificate = document.getElementById("file2").value;  
                            var adequation =  document.getElementById("file3").value;  
                            var mise_en_service = document.getElementById("file4").value; 
-                           var plan = document.getElementById("file5").value;  
+                          var inputElement = document.getElementById("file5").value;
                            var note_de_calcul = document.getElementById("file6").value;  
                            var plan = document.getElementById("file7").value;    
                            var fournisseurs  = document.getElementById("fournisseurs").value; 
 
                         //    var status_bv = document.getElementById("block_action");    
-
+                           console.log(inputElement); 
                        //     console.log(status_bv);                                       
                           
                            var statusMoyenSelect = document.getElementsByName("statusmoyen")[0].value; // Sélectionnez le champ select par son nom (utilisation [0] pour obtenir le premier élément si nécessaire)
@@ -421,23 +421,24 @@ function handleStatusBVChange(selectElement) {
                                         for (var i = 0; i < motsADisparaitre.length; i++) {
                                         motsADisparaitre[i].style.display = "none"; // ou "block", selon le contexte
                                         }
-                                          e.preventDefault();   
+                                          
                             }
 
 
                                   
 
-                            if(statusMoyenSelect==='Demande passage statut prod')
+                            if(statusMoyenSelect==='Demande passage statut prod' || statusMoyenSelect==='En production' )
                                 {
                                     if(fournisseurs==='TELMA')
                                     { 
-                                              if(adequation==="" || certificate==="" || mise_en_service==="" || plan==="" || note_de_calcul==="")
+                                              if(adequation==="" || certificate==="" || mise_en_service==="" || inputElement==="" || note_de_calcul==="")
                                               {
                                                   // alert("Vous devez mettre le certificat d'adéquation, la declaration de non conformité, et le rapport de mise en service, le plan et la note de calcul");
                                                   for (var i = 0; i < motsADisparaitre2.length; i++) {
                                                   motsADisparaitre2[i].style.display = "inline"; // ou "block", selon le contexte
                                                   }
-                                                  e.preventDefault();                                               
+                                                  e.preventDefault();    
+                                                                                           
                                               }
                                     }
                                     else
@@ -445,15 +446,15 @@ function handleStatusBVChange(selectElement) {
                                               for (var i = 0; i < motsADisparaitre2.length; i++) {
                                                   motsADisparaitre2[i].style.display = "none"; // ou "block", selon le contexte
                                                   }
-                                                  e.preventDefault();    
+                                                     
                                     }
                                 }
 
-                               if(statusMoyenSelect==='Demande passage statut prod')
+                               if(statusMoyenSelect==='Demande passage statut prod' || statusMoyenSelect==='En production')
                                 {
                                     if(fournisseurs!=='TELMA')
                                     { 
-                                              if(adequation==="" || certificate==="" || mise_en_service==="" || plan==="" || note_de_calcul==="")
+                                              if(adequation==="" || certificate==="" || mise_en_service==="")
                                               {
                                                   // alert("Vous devez mettre le certificat d'adéquation, la declaration de non conformité, et le rapport de mise en service, le plan et la note de calcul");
                                                   for (var i = 0; i < motsADisparaitre3.length; i++) {
@@ -467,7 +468,7 @@ function handleStatusBVChange(selectElement) {
                                                 for (var i = 0; i < motsADisparaitre3.length; i++) {
                                                   motsADisparaitre3[i].style.display = "none"; // ou "block", selon le contexte
                                                   }
-                                                  e.preventDefault();  
+                                                  
                                     }
                                 }
 
