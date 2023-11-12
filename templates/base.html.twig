@@ -50,8 +50,14 @@
                                     <div class="bloc_1_contenu"><a href="{{path('app_consulter')}}">Consulter tous les moyens</a></div>
 
                                     <div class="bloc_1_contenu"><a href="{{path('app_tableau')}}">Tableau de bord</a></div>
+                                    
+                                    {% if app.user.administrateur==false  %} 
+                                  
+                                    {% else %}
+                                      <div class="bloc_1_contenu"><a href="{{path('app_valider')}}">Valider un moyen</a></div>
+                                    {% endif %}
 
-                                    <div class="bloc_1_contenu"><a href="{{path('app_valider')}}">Valider un moyen</a></div>
+
 
                                      <div class="bloc_1_contenu"><a href="{{path('app_fiche_de_vie')}}">Mettre à jour la fiche de vie</a></div>
 

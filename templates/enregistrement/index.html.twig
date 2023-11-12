@@ -46,7 +46,7 @@
 
                                           
                                             {% if notification6 is not null %}
-                                               <div class="bloc_2_detail alert alert-success" role="alert">
+                                            <div class="bloc_2_detail alert alert-success" role="alert">
                                             <p> {{notification6}}
                                             </p>
                                             </div>
@@ -60,12 +60,21 @@
                                             </div>
                                              {% endif %}
 
-                                              {% if notification8 is not null %}
-                                                 <div class="bloc_2_detail alert alert-danger" role="alert">
+                                            {% if notification8 is not null %}
+                                            <div class="bloc_2_detail alert alert-danger" role="alert">
                                             <p> {{notification8}}
                                             </p>
                                             </div>
                                              {% endif %}
+
+                                                                              
+                                            {% if notification_non_enregistrer is not null %}
+                                            <div class="bloc_2_detail">
+                                            <div class="alert alert-danger" role="alert">
+                                            {{notification_non_enregistrer}}
+                                             </div>  
+                                             </div>
+                                            {% endif %}
 
                                                  
 
@@ -359,7 +368,7 @@ function handleStatusBVChange(selectElement) {
     var status_bv = selectElement.value;
 
     // Faites quelque chose avec la valeur, par exemple, imprimez-la dans la console
-    console.log("Nouveau statut BV : " + status_bv);
+  //  console.log("Nouveau statut BV : " + status_bv);
     // Vous pouvez également mettre votre logique ici en fonction de la valeur sélectionnée
     if(status_bv=='Non-conforme')
     {

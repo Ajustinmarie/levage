@@ -309,6 +309,22 @@ class MoyenDeLevageRepository extends ServiceEntityRepository
                                 return $resultSet->fetchAllAssociative();
                         }   
 
+            
+
+
+                          /***********************VMISE A JOUR NOT ADMIN EN PRODUCTION****************************************************/ 
+
+                          public function recherche_numero($numero): array
+                          {  
+                                  $conn = $this->getEntityManager()->getConnection();
+                                  $sql = "SELECT COUNT(*) AS COMPTER FROM moyen_de_levage WHERE numero=:numero ";        
+                                  $stmt = $conn->prepare($sql);
+                                  $stmt->bindValue(':numero', $numero, PDO::PARAM_STR);                                
+                                  $resultSet = $stmt->executeQuery();
+                                  // returns an array of arrays (i.e. a raw data set)
+                                  return $resultSet->fetchAllAssociative();
+                          }   
+
 
               /***********************VALIDER LE MOYEN MAINTENANCE***********************************************/ 
               public function upgrade_maintenance($numero): array
@@ -324,6 +340,9 @@ class MoyenDeLevageRepository extends ServiceEntityRepository
               }
 
 
+
+
+
                   /***********************MISE A JOUR DU STATUS FINAL***********************************************/ 
                     public function update_statut_final($numero): array
                        {
@@ -337,6 +356,7 @@ class MoyenDeLevageRepository extends ServiceEntityRepository
                              // returns an array of arrays (i.e. a raw data set)
                              return $resultSet->fetchAllAssociative();
                         }
+
 
     // /**
     //  * @return MoyenDeLevage[] Returns an array of MoyenDeLevage objects

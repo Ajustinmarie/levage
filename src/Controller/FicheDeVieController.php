@@ -65,6 +65,7 @@ class FicheDeVieController extends AbstractController
        $notification_validation_maintenance=null;
         $notification_validation_qualite=null;
         $notification1=null;
+        $notification2=null;
    
 
      /******************************************TOUTES LES LISTES DEROULANTES DU FORMULAIRE*************************************************************/     
@@ -128,11 +129,12 @@ class FicheDeVieController extends AbstractController
         $certificate=$item['certificatce']; 
         $ficheadequation=$item['ficheadequation']; 
         $rapport=$item['rapport']; 
-        $mise_en_service=$item['mise_en_service'];
-   
-        $plan=$item['plan']; 
+        $mise_en_service=$item['mise_en_service'];   
+        $plan=$item['plan'];         
         $notedecalcul=$item['notedecalcul']; 
         $imagemoyen=$item['imagemoyen'];  
+
+
         $approbationmaintenance=$item['approbationmaintenance']; 
         $approbationqualite=$item['approbationqualite'];        
     }
@@ -285,58 +287,8 @@ class FicheDeVieController extends AbstractController
                                     else
                                     {
 
-                                                    if(!empty($numero) and !empty($cmu_form)) 
-                                                    {
-                                                                        if($statusmoyen_form == 'En production' or $statusmoyen_form == 'Demande passage statut prod') 
-                                                                        {
-
-                                                          
-
-                                                                                            //  var_dump('inscrire la cmu top');
-                                                                                            if($fournisseurs_form == 'TELMA') {
-
-                                                                                                 //  var_dump('juju');
-                                                                                                if($statusbv_form == 'Non-conforme' and $motifBV_form == 'Neant') 
-                                                                                                {
-                                                                                                    $notification1 = 'Le champ motif de bureau veritas ne peut pas etre "Néant" si le status BV est non conforme';
-                                                                                                   // var_dump($notification1);
-                                                                                                } 
-                                                                                                else 
-                                                                                                {
-
-if($rapportbv_form['name'] == NULL or  $rapportbv_form['name'] == '' AND $rapport='' or $rapport=NULL ) 
-{
-   var_dump('veuillez mettre un rapport de bureau veritas');
-}
-if($certificate_form['name'] == NULL or  $certificate_form['name'] == '' AND $certificate='' or $certificate=NULL ) 
-{
-   var_dump('veuillez mettre le certificat');
-}
-
-if($ficheadequation='' or $ficheadequation=NULL ) 
-{ 
-   if($adequation_form['name']=='' or $adequation_form['name']==NULL)
-   {
-    var_dump('veuillez mettre la fiche de mise en adeqaution');
-   }
-      
-}
-
-
-
-if($mise_en_service_form['name'] == NULL or  $mise_en_service_form['name'] == '' AND $mise_en_service='' or $mise_en_service=NULL ) 
-{
-   var_dump('veuillez mettre un rapport de mise en service');
-}
-if($plan_form['name'] == NULL or  $plan_form['name'] == '' AND $plan='' or $plan=NULL) 
-{
-   var_dump('veuillez mettre le plan');
-}
-if($note_de_calcul_form['name'] == NULL or  $note_de_calcul_form['name'] == '' AND $notedecalcul='' or $notedecalcul=NULL) 
-{
-   var_dump('veuillez mettre la note de calcul');
-}
-    
+                                                   
+                                                                      
                                                                                                             $taille_autorise = 2000000000;
                                                                                                             /*****************************rapportbv*******************************/
                                                                                                             $taille1 = $rapportbv_form['size'];
@@ -383,37 +335,37 @@ if($note_de_calcul_form['name'] == NULL or  $note_de_calcul_form['name'] == '' A
                                                                                                             $extension7 = strchr($nom_fichier7, '.');
 
                                                                                                             $extension_autoriser = array('.png','.PNG','.jpg','.JPG','.pdf','');
-
+                                                                                                           
+                                                                                                           
 
                                                                                                             /*****************************rapportbv*****************************/
-                                                                                                            $nouveauNom1 = time();
+                                                                                                            $nouveauNom1 =   chr(rand(65, 90));
                                                                                                             $nouveauNom1 = '1-' . $nouveauNom1 . $extension1;
                                                                                                             $dossierReception1 = 'upload/' . $nouveauNom1;
                                                                                                             /*****************************certificate*****************************/
-                                                                                                            $nouveauNom2 = time();
+                                                                                                            $nouveauNom2 =  chr(rand(65, 122));
                                                                                                             $nouveauNom2 = '2-' . $nouveauNom2 . $extension2;
                                                                                                             $dossierReception2 = 'upload/' . $nouveauNom2;
                                                                                                             /*****************************adequation*****************************/
-                                                                                                            $nouveauNom3 = time();
-                                                                                                            $nouveauNom3 = '3-' . $nouveauNom2 . $extension3;
+                                                                                                            $nouveauNom3 =  chr(rand(65, 90));
+                                                                                                            $nouveauNom3 = '3-' . $nouveauNom3 . $extension3;
                                                                                                             $dossierReception3 = 'upload/' . $nouveauNom3;
                                                                                                             /*****************************mise_en_service*****************************/
-                                                                                                            $nouveauNom4 = time();
+                                                                                                            $nouveauNom4 =  chr(rand(65, 90));
                                                                                                             $nouveauNom4 = '4-' . $nouveauNom4 . $extension4;
                                                                                                             $dossierReception4 = 'upload/' . $nouveauNom4;
                                                                                                             /*****************************plan*****************************/
-                                                                                                            $nouveauNom5 = time();
+                                                                                                            $nouveauNom5 =  chr(rand(65, 90));
                                                                                                             $nouveauNom5 = '5-' . $nouveauNom5 . $extension5;
                                                                                                             $dossierReception5 = 'upload/' . $nouveauNom5;
                                                                                                             /*****************************note_de_calcul*****************************/
-                                                                                                            $nouveauNom6 = time();
+                                                                                                            $nouveauNom6 =  chr(rand(65, 90));
                                                                                                             $nouveauNom6 = '6-' . $nouveauNom6 . $extension6;
                                                                                                             $dossierReception6 = 'upload/' . $nouveauNom6;
                                                                                                             /*****************************img_moyen*****************************/
-                                                                                                            $nouveauNom7 = time();
+                                                                                                            $nouveauNom7 =  chr(rand(65, 90));
                                                                                                             $nouveauNom7 = '7-' . $nouveauNom7 . $extension7;
                                                                                                             $dossierReception7 = 'upload/' . $nouveauNom7;
-
 
 
                                                                                                             if(!in_array($extension1, $extension_autoriser) or !in_array($extension2, $extension_autoriser) or !in_array($extension3, $extension_autoriser) or !in_array($extension4, $extension_autoriser) or !in_array($extension5, $extension_autoriser) or !in_array($extension6, $extension_autoriser) or !in_array($extension7, $extension_autoriser)) {
@@ -454,8 +406,6 @@ if($note_de_calcul_form['name'] == NULL or  $note_de_calcul_form['name'] == '' A
                                                                                                                     $testdeplacer4 = move_uploaded_file($dossierTempo4, $dossierReception4);
                                                                                                                 }
                                                                                                             /*************************MISE EN SERVICE ***********************/
-
-
 
                                                                                                             /*************************PLAN ***********************/
                                                                                                             //  var_dump($plan_form);
@@ -531,58 +481,23 @@ if($note_de_calcul_form['name'] == NULL or  $note_de_calcul_form['name'] == '' A
                                                                                                       $nouveauNom7);
 
                   $notification2 = 'Le champ à été mise a jour';
-                  var_dump($notification2);
+                  header("Refresh:2");
+                  
+                 // var_dump($notification2);
                                                                                                      
     }
 
 }
-
-
-                                                                                            } elseif($fournisseurs_form != 'TELMA') {
-                                                                                                var_dump('jujufrfrfr');
-                                                                                            }
-                            
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            /*Il peut tout enregistrer*/
-                                                                        }
-
+                                                                            
              }
               else
              {
-               $notification3='Il vous manque le numero de serie ou la CMU du moyen de levage';
+               $notification3='Il vous manque la CMU du moyen de levage';
              }
-                                           
-
-
-
-
-
-
-
-
-
-
-                                        
-                                    }
-                             }
-                             /******************NOT ADMIN EN PRODUCTION */
-
-
-                   }
-
-
-
-
-
                 
-       
-    }
-
-
-
-       // var_dump($resultat_recherches_uniques);
+      }       
+ }
+        // var_dump($resultat_recherches_uniques);
         return $this->render('fiche_de_vie/modification.html.twig', [
             'DescriptionMoyens'=>$description,
             'zone_services'=>$zone_service,
@@ -623,29 +538,11 @@ if($note_de_calcul_form['name'] == NULL or  $note_de_calcul_form['name'] == '' A
             'approbationqualite'=>$approbationqualite,
             'notification_validation_maintenance'=>$notification_validation_maintenance,
             'notification_validation_qualite'=>$notification_validation_qualite,
-            'notification1'=>$notification1
+            'notification1'=>$notification1,
+            'notification2'=>$notification2
        
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

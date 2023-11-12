@@ -40,10 +40,20 @@
                                     </div>
                                   -->
 
+
+
                                   {% if notification1 is not null %}
                                    <div class="bloc_2_detail">
                                              <div class="alert alert-warning" role="alert">
                                                 {{notification1}}
+                                             </div>  
+                                         </div>
+                                   {% endif %}
+    
+                                    {% if notification2 is not null %}
+                                   <div class="bloc_2_detail">
+                                             <div class="alert alert-warning" role="alert">
+                                                {{notification2}}
                                              </div>  
                                          </div>
                                    {% endif %}
@@ -82,7 +92,7 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Description du moyen</label>                                            
 
-                                       <select  {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} name="description" class="form-control" id="exampleFormControlSelect1">
+                                       <select  {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} name="description" class="form-control" id="exampleFormControlSelect1">
 
                                                       <option value="{{description_bdd}}">{{description_bdd}}</option>
                                                     {% for DescriptionMoyen in DescriptionMoyens  %}
@@ -93,8 +103,8 @@
                                         </div>
 
                                         <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">CMU</label>                                       
-                                         <input {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} {% if cmu_bdd is defined %} value="{{cmu_bdd}}" {% endif %} class="form-control" name="cmu" type="number" placeholder="Veuillez saisir la CMU">
+                                        <label for="exampleInputEmail1" class="form-label">CMU <span class="numero_cmu"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> </label>                                       
+                                         <input {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} {% if cmu_bdd is defined %} value="{{cmu_bdd}}" {% endif %} class="form-control" name="cmu" id="cmu" type="number" placeholder="Veuillez saisir la CMU">
                                         </div>
 
                                           <div class="mb-3">
@@ -113,7 +123,7 @@
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Fournisseurs</label>
-                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="fournisseurs" id="exampleFormControlSelect1">
+                                            <select {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} class="form-control" name="fournisseurs" id="fournisseurs" id="exampleFormControlSelect1">
                                                           
                                                           <option value="{{fournisseurs_bdd}}">{{fournisseurs_bdd}}</option>
                                                           {% for fournisseur in fournisseurs  %}
@@ -139,11 +149,11 @@
                                         </div>
 
                                       <!-- Condition  Status du moyen -->
-                                      {% if statusDuMoyen_bdd == 'En production' and app.user.administrateur==false %}
+                                      {% if  app.user.administrateur==false and statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod' %}
 
                                            <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Status du moyen</label>
-                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
+                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod'  %} disabled {% endif %} class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
 
                                                      <option value="{{statusDuMoyen_bdd}}">{{statusDuMoyen_bdd}}</option>
                                                      {% for statusDuMoyen in statusDuMoyens  %}
@@ -178,7 +188,7 @@
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Status du moyen</label>
-                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
+                                            <select id="status_du_moyen" {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod'  %} disabled {% endif %} class="form-control" name="statusmoyen" id="exampleFormControlSelect1">
 
                                                      <option value="{{statusDuMoyen_bdd}}">{{statusDuMoyen_bdd}}</option>
                                                      {% for statusDuMoyen in statusDuMoyens  %}
@@ -208,12 +218,12 @@
                                      
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Date de vérification Bureau Véritas</label>
-                                             <input {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} value="{{dateverifbv}}" name="dateverifbv"  class="form-control" type="date" placeholder="Default input">
+                                             <input {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} value="{{dateverifbv}}" name="dateverifbv"  class="form-control" type="date" placeholder="Default input">
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Status Bureau Veritas</label>
-                                            <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="statusbv" id="exampleFormControlSelect1">
+                                            <select id="statusbv"  onchange="handleStatusBVChange(this)" {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} class="form-control" name="statusbv" id="exampleFormControlSelect1">
 
                                                 <option value="{{statusBV_bdd}}">{{statusBV_bdd}}</option>
                                                {% for statusBV in statusBVs  %}
@@ -225,10 +235,10 @@
 
 
                                         </div>
-
+                 <div class="block_action" >   
                                         <div class="mb-3">
                                           <label for="exampleFormControlSelect1">Motif Bureau Veritas</label>                                          
-                                          <select {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} class="form-control" name="motifBV" id="exampleFormControlSelect1">
+                                          <select {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} class="form-control" name="motifBV" id="exampleFormControlSelect1">
                                                       
                                                       <option value="{{motifBVs_bdd}}">{{motifBVs_bdd}}</option>
                                                        {% for motifBV in motifBVs  %}
@@ -241,7 +251,7 @@
 
                                       <div class="form-floating">
                                         <label for="floatingTextarea">Observations Bureau Veritas</label>
-                                        <textarea {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %} disabled {% endif %} name="observations" class="form-control" placeholder="Veuillez saisir une action" id="floatingTextarea">{% if observations is defined %} {{observations}} {% endif %}</textarea>                                                                              
+                                        <textarea {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %} disabled {% endif %} name="observations" class="form-control" placeholder="Veuillez saisir une action" id="floatingTextarea">{% if observations is defined %} {{observations}} {% endif %}</textarea>                                                                              
                                 </div>
 
                                 <div class="mb-3">
@@ -266,7 +276,7 @@
                               <label for="floatingTextarea">Action à mettre en place</label>
                                 <textarea name="actions" class="form-control" placeholder="Veuillez saisir l'action" id="floatingTextarea">{% if action_bdd is defined %} {{action_bdd}} {% endif %}</textarea>      
                           </div>
-
+                 </div> 
                                         <div class="form-floating">
                                                 <label for="floatingTextarea">Commentaire</label>
                                                 <textarea name="commentaire" class="form-control" placeholder="Veuillez saisir un commentaire" id="floatingTextarea">{% if commentaire is defined %} {{commentaire}} {% endif %}</textarea>                                                                                 
@@ -278,21 +288,27 @@
                                           <div class="custom-file mt-2">
                                                                                                                     
                                                 
-                                                    {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}                                                           
+                                                    {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}                                                           
                                                            
                                                                <label>Dernier Rapport Bureau Véritas</label>
                                                              {% if rapport is not empty and rapport is not null  %} 
-                                                             <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                             <a href="http://127.0.0.1:8000/upload/{{rapport}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                            
                                                              {% endif %}
                                                                                                                        
                                                     {% else %}  
                                                             
-                                                          
+                                                       
                                                                   <label>Dernier Rapport Bureau Véritas</label>
+
+                                                                 
+
                                                               {% if rapport is not empty and rapport is not null  %} 
-                                                               <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                               <a href="http://127.0.0.1:8000/upload/{{rapport}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                              <input type="hidden" name="cacher_rapportbv" id="file1_cacher" value="{{rapport}}"/>
                                                                {% endif %}
-                                                                <input type="file" name="rapportbv"> 
+                                                                <input  type="file" name="rapportbv"  id="file1" > 
+                                                                
                                                            
                                                    {% endif %}                                                 
                                                                                   
@@ -306,22 +322,26 @@
 
                                       <div class="custom-file mt-2">                                                                                          
 
-                                         {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}                                                     
+                                         {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}                                                     
                                                 
                                                      <label>Déclaration de conformité:</label>  
                                                      {% if certificat is not empty and certificat is not null %} 
-                                                     <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>    
+                                                     <a href="http://127.0.0.1:8000/upload/{{certificat}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>    
                                                      {% endif %}                                              
                                               
                                           {% else %}                                                     
                                                      
-                                                      <label>Déclaration de conformité:</label>
+                                                      <label>Déclaration de conformité:<span class="difftelma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span></label>
                                                       {% if certificat is not empty and certificat is not null %} 
-                                                      <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                      <a href="http://127.0.0.1:8000/upload/{{certificat}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                        <input type="hidden" name="cacher_certificate" id="file2_cacher"  value="{{certificat}}"/>  
+                                                      {% else %}
+                                                         <input type="hidden" name="cacher_certificate" id="file2_cacher"  value=""/>                                                        
                                                       {% endif %}   
-                                                     <input type="file" name="certificate"> 
-                                                                                          
-                                                {% endif %}    
+                                                      <input type="file" name="certificate" id="file2"> 
+                                                    
+                                                                                                                                       
+                                             {% endif %}    
                                           </div>
 
                                           
@@ -332,24 +352,27 @@
                                               
                                           <div class="custom-file mt-2">                                               
 
-                                                 {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                 {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}   
                                                         
                                              
-                                                 <label>Fiche d’adéquation</label>
+                                                 <label>Fiche d’adéquation </label>
                                                 {% if ficheadequation is not empty and ficheadequation is not null  %}  
-                                                <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>    
+                                                <a href="http://127.0.0.1:8000/upload/{{ficheadequation}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>    
                                                 {% endif %}  
 
                                                                                        
                                                
                                                  {% else %}                                                          
                                               
-                                                 <label>Fiche d’adéquation</label>
+                                                 <label>Fiche d’adéquation <span class="difftelma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> </label>
                                                   {% if ficheadequation is not empty and ficheadequation is not null  %}          
-                                                 <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                 <a href="http://127.0.0.1:8000/upload/{{ficheadequation}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                  <input type="hidden" name="cacher_adequation" id="file3_cacher" value="{{ficheadequation}}"/>   
+                                                 {% else %}
+                                                   <input type="hidden" name="cacher_adequation" id="file3_cacher" value=""/> 
                                                  {% endif %} 
-                                                 <input type="file" name="adequation">
-
+                                                 <input type="file" name="adequation" id="file3">
+                                                 
                                                   {% endif %}    
                                         </div>
 
@@ -358,26 +381,30 @@
 
                                           <div class="custom-file mt-2">                                                
 
-                                                     {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                     {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}   
                                                             
                                                            
                                                              <label>Rapport de mise en service</label>
                                                              {% if mise_en_service is not empty and mise_en_service is not null  %} 
-                                                             <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                             <a href="http://127.0.0.1:8000/upload/{{mise_en_service}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
                                                              {% endif %}   
                                                            
 
                                                      {% else %}   
                                                               
                                                           
-                                                             <label>Rapport de mise en service</label>
+                                                             <label>Rapport de mise en service <span class="difftelma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span> </label>
                                                               {% if mise_en_service is not empty and mise_en_service is not null  %} 
-                                                             <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
-                                                              {% endif %}
-                                                             <input type="file" name="mise_en_service">                                                             
-                                                           
-                                                                                       
-                                                     {% endif %}    
+                                                                  <a href="http://127.0.0.1:8000/upload/{{mise_en_service}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                                  <input type="hidden"  name="cacher_mise_en_service" id="file4_cacher" value="{{mise_en_service}}"/>  
+                                                              {% else %}
+                                                                  <input type="hidden"  name="cacher_mise_en_service" id="file4_cacher" value=""/> 
+                                                               {% endif  %}
+
+                                                             <input type="file" id="file4" name="mise_en_service"> 
+
+                                                                                                                                                    
+                                                    {% endif %}    
                                           </div>
 
                                             
@@ -388,24 +415,28 @@
 
                                           <div class="custom-file mt-2">                                                
                                                   
-                                                  {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                  {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}   
                                                         
                                                        
-                                               <label>Plan</label>
+                                               <label>Plan </label>
                                                {% if plan is not empty and plan is not null  %}
-                                               <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
-                                               {% endif %} 
-                                                     
-                                                  {% else %}   
+                                                     <a href="http://127.0.0.1:8000/upload/{{plan}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                     <input type="hidden" name="cacher_plan" id="file5_cacher" value="null"/>                                         
+                                               {% endif %}  
                                                          
-                                                        
-                                                         <label>Plan</label>
-                                                {% if plan is not empty and plan is not null  %}
-                                              <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
-                                              {% endif %} 
-                                                         <input type="file" name="plan">   
+                                              {% else %}  
 
-                                                 {% endif %}                                       
+                                               <label>Plan<span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span></label>
+                                                   {% if plan is not empty and plan is not null  %}
+                                                   <a href="http://127.0.0.1:8000/upload/{{plan}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                   <input type="hidden" name="cacher_plan" id="file5_cacher" value="{{plan}}"/>     
+                                                   {% else %} 
+                                                        <input type="hidden" name="cacher_plan" id="file5_cacher" value=""/>                                                         
+                                                  {% endif %}
+
+                                               <input type="file" id="file5" name="plan"> 
+
+                                               {% endif %}                                         
                                                
                                           </div>
 
@@ -416,22 +447,25 @@
                                           
                                           <div class="custom-file mt-2">                                                 
                                                  
-                                                    {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}                                                             
+                                                    {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}                                                             
                                                                
                                                             <label>Note de calcul</label>
                                                             {% if notedecalcul is not empty and notedecalcul is not null  %} 
-                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                            <a href="http://127.0.0.1:8000/upload/{{notedecalcul}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
                                                             {% endif %} 
                                                                       
                                                             {% else %}                                                              
                                                                       
-                                                            <label>Note de calcul</label>
+                                                            <label>Note de calcul   <span class="telma"><iconify-icon icon="fa-solid:exclamation" style="color: red;"></span>   </label>
                                                              {% if notedecalcul is not empty and notedecalcul is not null  %} 
-                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                            <a href="http://127.0.0.1:8000/upload/{{notedecalcul}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                             <input type="hidden" id="file6_cacher" name="cacher_note_de_calcul" value="{{notedecalcul}}"/>  
+                                                             {% else %} 
+                                                              <input type="hidden" id="file6_cacher" name="cacher_note_de_calcul" value=""/> 
                                                             {% endif %} 
                                                                         
-                                                            <input type="file"name="note_de_calcul"> 
-                                                 
+                                                            <input type="file" id="file6" name="note_de_calcul"> 
+                                                           
                                                       {% endif %}
                                                   
                                                                                                                                                
@@ -444,12 +478,12 @@
 
                                           <div class="custom-file mt-2 ">
 
-                                                     {% if app.user.administrateur==false and statusDuMoyen_bdd == 'En production' %}   
+                                                     {% if app.user.administrateur==false and (statusDuMoyen_bdd == 'En production' or statusDuMoyen_bdd == 'Demande passage statut prod')  %}   
                                                                
                                                              
                                                             <label>Image du moyen</label>  
                                                             {% if imagemoyen is not empty and imagemoyen is not null  %} 
-                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
+                                                            <a href="http://127.0.0.1:8000/upload/{{imagemoyen}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a> 
                                                             {% endif %}  
                                                                         
 
@@ -458,11 +492,12 @@
                                                             
                                                             <label>Image du moyen</label> 
                                                            {% if imagemoyen is not empty and imagemoyen is not null  %} 
-                                                            <a href="#"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                            <a href="http://127.0.0.1:8000/upload/{{imagemoyen}}"><iconify-icon icon="line-md:cloud-upload-loop" style="color: #4cb4e7;" width="40" height="40"></iconify-icon></a>  
+                                                              <input type="hidden" id="file7_cacher" name="cacher_img_moyen" value="{{imagemoyen}}"/> 
                                                             {% endif %}  
                                                                     
-                                                              <input type="file" name="img_moyen">
-
+                                                              <input type="file" id="file7" name="img_moyen">
+                                                           
                                                      {% endif %}  
                                            
                                           </div>  
@@ -483,13 +518,203 @@
                                        
                                        
                                         
-                                        <button type="submit" value="mise_a_jour_moyen" name="mise_a_jour_moyen" class="btn btn-primary mt-3">Mettre à jour le moyen</button>
+                                        <button type="submit" id="mise_a_jour" value="mise_a_jour_moyen" name="mise_a_jour_moyen" class="btn btn-primary mt-3">Mettre à jour le moyen</button>
 
                                           {% if app.user.fonction == 'MAINTENANCE' and approbationmaintenance == 0 and statusDuMoyen_bdd == 'Demande passage statut prod' %}   <button type="submit" value="validation_moyen_maintenance" name="validation_moyen" class="btn btn-primary mt-3">Valider le moyen</button> {% endif %}
                                           {% if app.user.fonction == 'QUALITE' and approbationqualite == 0 and statusDuMoyen_bdd == 'Demande passage statut prod' %}   <button type="submit" value="validation_moyen_qualite" name="validation_moyen" class="btn btn-primary mt-3">Valider le moyen</button>         {% endif %}
                                          
                                     </form>
                                 </div>
+
+
+
+                                  <script src="{{asset('assets/js/jquery.js')}}"></script>
+
+                                  <script>
+
+                                                          var motsADisparaitre = document.getElementsByClassName("numero_cmu");
+                                                          for (var i = 0; i < motsADisparaitre.length; i++) {
+                                                              motsADisparaitre[i].style.display = "none";
+                                                          }
+
+
+                                                        var motsADisparaitre2 = document.getElementsByClassName("telma");
+                                                        for (var i = 0; i < motsADisparaitre2.length; i++) {
+                                                            motsADisparaitre2[i].style.display = "none";
+                                                        }
+
+                                                        var motsADisparaitre3 = document.getElementsByClassName("difftelma");
+                                                        for (var i = 0; i < motsADisparaitre3.length; i++) {
+                                                            motsADisparaitre3[i].style.display = "none";
+                                                        }
+
+                                                          var motsADisparaitre4 = document.getElementsByClassName("block_action");
+                                                        for (var i = 0; i < motsADisparaitre4.length; i++) {
+                                                            motsADisparaitre4[i].style.display = "none";
+                                                        }
+
+                                                       var statusMoyenSelect = document.getElementsByName("statusmoyen")[0].value;
+
+                                                       var status_bv = document.getElementsByName("statusbv")[0].value; 
+
+
+                                                       document.addEventListener("DOMContentLoaded", function() {
+                                                              
+                                                                          if (status_bv === 'Non-conforme') {
+                                                                              for (var i = 0; i < motsADisparaitre4.length; i++) {
+                                                                                  motsADisparaitre4[i].style.display = "inline";
+                                                                              }
+                                                                          } else {
+                                                                              for (var i = 0; i < motsADisparaitre4.length; i++) {
+                                                                                  motsADisparaitre4[i].style.display = "none";
+                                                                              }
+                                                                          }
+
+                                                       });
+
+                                                       function handleStatusBVChange(selectElement) {
+                                                                // Obtenez la valeur sélectionnée
+                                                                var status_bv = selectElement.value;
+                                                                // Faites quelque chose avec la valeur, par exemple, imprimez-la dans la console
+                                                                //  console.log("Nouveau statut BV : " + status_bv);
+                                                                // Vous pouvez également mettre votre logique ici en fonction de la valeur sélectionnée
+                                                                if(status_bv=='Non-conforme')
+                                                                {
+                                                                            for (var i = 0; i < motsADisparaitre4.length; i++) {
+                                                                                motsADisparaitre4[i].style.display = "inline";
+                                                                            }
+                                                                }
+                                                                else
+                                                                {
+                                                                      for (var i = 0; i < motsADisparaitre4.length; i++) {
+                                                                                motsADisparaitre4[i].style.display = "none";
+                                                                            }
+                                                                }
+                                                       }
+
+
+
+                                                        $("#mise_a_jour").click(function(e){
+
+                                                                  var cmu = document.getElementById("cmu").value;
+                                                               // var numero = document.getElementById("numero").value;
+                                                               // probleme  var rapportBV = document.getElementById("file1").value;  
+                                                                //  var cacher_rapportBV = document.getElementById("file1_cacher").value; 
+
+                                                                       /* OK */
+                                                                var certificate = document.getElementById("file2").value;  
+                                                                 var cacher_certificate= document.getElementById("file2_cacher").value; 
+
+                                                                var adequation =  document.getElementById("file3").value;  
+                                                                var cacher_adequation= document.getElementById("file3_cacher").value; 
+
+
+                                                                  var mise_en_service = document.getElementById("file4").value;
+                                                                  var cacher_mise_en_service=document.getElementById("file4_cacher").value; 
+                                                                 
+                                                               
+                                                                  var plan = document.getElementById("file5").value;
+                                                                  var cacher_plan=document.getElementById("file5_cacher").value; 
+
+                                                                 var note_de_calcul = document.getElementById("file6").value;  
+                                                                 var cacher_note_de_calcul=document.getElementById("file6_cacher").value; 
+                                                                       /* OK */                                                                      
+
+                                                              //    var image = document.getElementById("file7").value;  
+                                                             //     var cacher_plan=document.getElementById("file7_cacher").value; 
+
+                                                                  var fournisseurs  = document.getElementById("fournisseurs").value; 
+                                                                 var statusMoyenSelect = document.getElementsByName("statusmoyen")[0].value;
+
+                                                               //   console.log(cacher_note_de_calcul);
+
+
+                                                                //  e.preventDefault(); 
+
+     
+
+                                                                 if(cmu==="")
+                                                                  {
+                                                                    //  alert("Vous inscrire la cmu ou le numero de serie");
+                                                                    //    motADisparaitre.style.display = "inline";
+                                                                              for (var i = 0; i < motsADisparaitre.length; i++) {
+                                                                              motsADisparaitre[i].style.display = "inline"; // ou "block", selon le contexte
+                                                                              }
+                                                                              
+                                                                              e.preventDefault();   
+                                                                              
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                              for (var i = 0; i < motsADisparaitre.length; i++) {
+                                                                              motsADisparaitre[i].style.display = "none"; // ou "block", selon le contexte
+                                                                              }
+                                                                                
+                                                                  }
+
+                                                         
+
+                                                          if(statusMoyenSelect==='Demande passage statut prod' || statusMoyenSelect==='En production' )
+                                                          {
+                                                            
+                                                                        if(fournisseurs==='TELMA')
+                                                                        {
+                                                                         // console.log(fournisseurs);
+
+                                                                                  if( (certificate==="" && cacher_certificate==="") || (adequation==="" && cacher_adequation==="") ||  (mise_en_service==="" && cacher_mise_en_service==="") || (plan==="" && cacher_plan==="") || (note_de_calcul==="" && cacher_note_de_calcul===""))
+                                                                                  {
+                                                                                              //    console.log('juju');
+                                                                                                    for (var i = 0; i < motsADisparaitre2.length; i++) {
+                                                                                                    motsADisparaitre2[i].style.display = "inline"; // ou "block", selon le contexte
+                                                                                                    }
+                                                                                                    
+                                                                                                    e.preventDefault();    
+                                                                                  }
+                                                                                                                                                              
+                                                                        }
+                                                                        else
+                                                                         {
+                                                                                                    for (var i = 0; i < motsADisparaitre2.length; i++) {
+                                                                                                    motsADisparaitre2[i].style.display = "none"; // ou "block", selon le contexte
+                                                                                                  }      
+                                                                                                  
+                                                                                                                                                                                                                                                            
+                                                                         }
+                                                                 
+                                                          }
+                                                         
+
+                                                          
+                                                             if(statusMoyenSelect==='Demande passage statut prod' || statusMoyenSelect==='En production' )
+                                                             {
+                                                               console.log(statusMoyenSelect);
+                                                                          if(fournisseurs!=='TELMA')
+                                                                          { 
+                                                                                // console.log(fournisseurs);   
+                                                                                  if( (certificate==="" && cacher_certificate==="") || (adequation==="" && cacher_adequation==="") || (mise_en_service==="" && cacher_mise_en_service===""))
+                                                                                  {
+                                                                                               for (var i = 0; i < motsADisparaitre3.length; i++) {
+                                                                                              motsADisparaitre3[i].style.display = "inline"; // ou "block", selon le contexte
+                                                                                              }
+                                                                                              e.preventDefault();                                                                                    
+                                                                                  }                                                                                                                                                           
+                                                                          }
+                                                                            else
+                                                                                  {
+                                                                                        for (var i = 0; i < motsADisparaitre3.length; i++) {
+                                                                                        motsADisparaitre3[i].style.display = "none"; // ou "block", selon le contexte
+                                                                                        }
+                                                                                                
+                                                                                  }
+                                                                          
+
+                                                             }
+
+                                                                
+
+                                                        })
+                                   </script>
+
          
 
 {% endblock %}

@@ -78,6 +78,7 @@ class EnregistrementController extends AbstractController
 
         $notification8=null;
         $statusDuMoyen2=null;
+        $notification_non_enregistrer=null;
 
         if ($request->isMethod('POST')) 
         {
@@ -107,7 +108,7 @@ class EnregistrementController extends AbstractController
                                                 $img_moyen=$request->files->get('img_moyen');
 
                                              
-                                               var_dump($numero);
+                                             //  var_dump($numero);
 
                                                 $taille_autorise = 2000000000;
                                                 /*****************************rapportbv*******************************/                                                       
@@ -265,39 +266,67 @@ class EnregistrementController extends AbstractController
                                                 }
 
                                                 //  $insertion_voiture=$this->entityManager->getRepository(Voitures::class)->insertion($nomdevoiture, $prix, $anneecirculation, $kilometrage, $contact, $nouveauNom1,$nouveauNom2,$nouveauNom3, $nouveauNom4, $moteur, $transmission, $carrosserie);
-                                        
+                                                $recherche_numero=$this->entityManager->getRepository(MoyenDeLevage::class)->recherche_numero($numero);
+
+                                            //    var_dump($recherche_numero);
+
+                                            //    var_dump($recherche_numero[0]['COMPTER']);
+
+                                                if ($recherche_numero[0]['COMPTER'] == 0) {                                                                                                    
+                                                     /*  aucune correspond OK */
+                                                    $verif_numero=1;
+                                                }
+                                                else
+                                                {  
+                                                    /* correspondance deja */
+                                                    $verif_numero=0;
+                                                }
+
+                                             //   var_dump($verif_numero);
                                                 
-                                                $insertion_moyen_de_levage = $this->entityManager->getRepository(MoyenDeLevage::class)->insertion(
-                                                    $user_name,
-                                                    $numero,
-                                                    $description_form,
-                                                    $cmu,
-                                                    $zone_service_form,
-                                                    $fournisseurs_form,
-                                                    $emplacement_form,
-                                                    $statusmoyen_form,
-                                                    $dateverifbv,
-                                                    $statusbv_form,
-                                                    $motifBV_form,
-                                                    $observations,
-                                                    $pilote_form,
-                                                    $delais,
-                                                    $actions,
-                                                    $commentaire,
-                                                    $nouveauNom2,
-                                                    $nouveauNom3,
-                                                    $nouveauNom1,
-                                                    $nouveauNom5,
-                                                    $nouveauNom6,
-                                                    $nouveauNom7,
-                                                    $approbationqualite,
-                                                    $appobationmaintenance,
-                                                    $dateenregistrement,
-                                                    $date_mise_ajour,
-                                                    $tatut_final,
-                                                    $nouveauNom4
-                                                ); 
-                                                $notification6 = 'Le moyen de levage à bien été enregistrer';
+                                                if($verif_numero==1)
+                                                {
+                                                    $insertion_moyen_de_levage = $this->entityManager->getRepository(MoyenDeLevage::class)->insertion(
+                                                        $user_name,
+                                                        $numero,
+                                                        $description_form,
+                                                        $cmu,
+                                                        $zone_service_form,
+                                                        $fournisseurs_form,
+                                                        $emplacement_form,
+                                                        $statusmoyen_form,
+                                                        $dateverifbv,
+                                                        $statusbv_form,
+                                                        $motifBV_form,
+                                                        $observations,
+                                                        $pilote_form,
+                                                        $delais,
+                                                        $actions,
+                                                        $commentaire,
+                                                        $nouveauNom2,
+                                                        $nouveauNom3,
+                                                        $nouveauNom1,
+                                                        $nouveauNom5,
+                                                        $nouveauNom6,
+                                                        $nouveauNom7,
+                                                        $approbationqualite,
+                                                        $appobationmaintenance,
+                                                        $dateenregistrement,
+                                                        $date_mise_ajour,
+                                                        $tatut_final,
+                                                        $nouveauNom4
+                                                    ); 
+                                                    $notification6 = 'Le moyen de levage à bien été enregistrer';
+                                                    
+                                                }
+                                                else
+                                                {
+                                                    $notification_non_enregistrer = 'Ce numero de serie existe déja dans la base veuillez saisir un autre numéro';
+                                                }
+                                               
+                                            
+
+                                              
                                               //  header("Refresh:3");
                                              
 
@@ -369,7 +398,8 @@ class EnregistrementController extends AbstractController
             'note_de_calcul'=>$nom_fichier6,
             'img_moyen'=>$nom_fichier7,
             'adequation'=>$nom_fichier3,
-            'statusDuMoyen2s'=>$statusDuMoyen2
+            'statusDuMoyen2s'=>$statusDuMoyen2,
+            'notification_non_enregistrer'=>$notification_non_enregistrer 
         ]);
 
     
